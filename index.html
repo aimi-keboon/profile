@@ -1,1238 +1,1595 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Aimi Misman's Profile</title>
-    <meta content="" name="description" />
-    <meta content="" name="keywords" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon" />
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+  <title>Aimi Misman | Technical Project Manager</title>
+  <meta name="description"
+    content="Aimi Misman — Technical Project Manager with a software engineering background, specialising in digital platform delivery, release governance, stakeholder management, and cross-system coordination." />
 
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-      rel="stylesheet"
-    />
+  <style>
+    :root {
+      --bg: #fff8fb;
+      --bg-2: #fff2f7;
+      --surface: rgba(255, 255, 255, 0.88);
+      --surface-solid: #ffffff;
+      --text: #2f2430;
+      --muted: #756472;
+      --line: rgba(128, 73, 104, 0.14);
+      --brand: #d98cab;
+      --brand-strong: #b95e84;
+      --brand-deep: #7f3f5d;
+      --accent: #f3bfd1;
+      --accent-soft: #fde7ef;
+      --success: #5ca878;
+      --shadow: 0 16px 48px rgba(176, 100, 134, 0.11);
+      --shadow-soft: 0 10px 28px rgba(176, 100, 134, 0.08);
+      --radius: 24px;
+      --max: 1160px;
+    }
 
-    <!-- Vendor CSS Files -->
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
-    <link
-      href="assets/vendor/bootstrap/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
-    <link
-      href="assets/vendor/glightbox/css/glightbox.min.css"
-      rel="stylesheet"
-    />
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet" />
+    html {
+      scroll-behavior: smooth;
+    }
 
-    <!-- =======================================================
-  * Template Name: MyResume
-  * Updated: Jan 29 2024 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-  </head>
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(217, 140, 171, 0.16), transparent 29%),
+        radial-gradient(circle at 92% 6%, rgba(243, 191, 209, 0.24), transparent 28%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      line-height: 1.65;
+    }
 
-  <body>
-    <!-- ======= Mobile nav toggle button ======= -->
-    <!-- <button type="button" class="mobile-nav-toggle d-xl-none"><i class="bi bi-list mobile-nav-toggle"></i></button> -->
-    <i class="bi bi-list mobile-nav-toggle d-lg-none"></i>
-    <!-- ======= Header ======= -->
-    <header id="header" class="d-flex flex-column justify-content-center">
-      <nav id="navbar" class="navbar nav-menu">
-        <ul>
-          <li>
-            <a href="#hero" class="nav-link scrollto active"
-              ><i class="bx bx-home"></i> <span>Home</span></a
-            >
-          </li>
-          <!--
-          <li>
-            <a href="#about" class="nav-link scrollto"
-              ><i class="bx bx-user"></i> <span>About</span></a
-            >
-          </li>
-          -->
-          <li>
-            <a href="#resume" class="nav-link scrollto"
-              ><i class="bx bx-file-blank"></i> <span>Resume</span></a
-            >
-          </li>
-          <!--
-          <li>
-            <a href="#portfolio" class="nav-link scrollto"
-              ><i class="bx bx-book-content"></i> <span>Portfolio</span></a
-            >
-          </li>
-          
-          <li>
-            <a href="#services" class="nav-link scrollto"
-              ><i class="bx bx-server"></i> <span>Services</span></a
-            >
-          </li>
-          -->
-          <li>
-            <a href="#contact" class="nav-link scrollto"
-              ><i class="bx bx-envelope"></i> <span>Contact</span></a
-            >
-          </li>
-        </ul>
-      </nav>
-      <!-- .nav-menu -->
-    </header>
-    <!-- End Header -->
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-    <!-- ======= Hero Section ======= -->
-    <section id="hero" class="d-flex flex-column justify-content-center">
-      <div class="container" data-aos="zoom-in" data-aos-delay="100">
-        <h1>Aimi Misman</h1>
-        <p>
-          Contact me if you're looking for:
-          <span
-            class="typed"
-            data-typed-items="Software QA, Business Analyst, Project Manager"
-          ></span>
-        </p>
-        <div class="social-links">
-          <a
-            href="https://www.instagram.com/aimizaff/"
-            target="_blank"
-            class="instagram"
-            ><i class="bx bxl-instagram"></i
-          ></a>
-          <a
-            href="https://www.linkedin.com/in/aimi-misman-065b2a150/"
-            target="_blank"
-            class="linkedin"
-            ><i class="bx bxl-linkedin"></i
-          ></a>
-        </div>
-      </div>
-    </section>
-    <!-- End Hero -->
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-    <main id="main">
+    button {
+      font: inherit;
+    }
 
-  <!-- ======= About Section ======= -->
+    .container {
+      width: min(var(--max), calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 64px 0;
+    }
+
+    .accordion-section {
+      padding: 14px 0;
+    }
+
+    .accordion-stack {
+      display: grid;
+      gap: 14px;
+      padding: 46px 0 56px;
+    }
+
+    .accordion-card {
+      overflow: hidden;
+    }
+
+    .accordion-card summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--text);
+      font-weight: 850;
+    }
+
+    .accordion-card summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .accordion-title {
+      display: grid;
+      gap: 4px;
+    }
+
+    .accordion-title span:first-child {
+      color: var(--brand-deep);
+      font-size: 1.18rem;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+    }
+
+    .accordion-title span:last-child {
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 550;
+      letter-spacing: 0;
+    }
+
+    .accordion-icon {
+      flex: 0 0 auto;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: var(--accent-soft);
+      color: var(--brand-deep);
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .accordion-card[open] .accordion-icon {
+      transform: rotate(45deg);
+      background: rgba(217, 140, 171, 0.22);
+    }
+
+    .accordion-content {
+      padding: 0 24px 24px;
+      animation: accordionRise 220ms ease both;
+    }
+
+    @keyframes accordionRise {
+      from {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 26px;
+    }
+
+    .section-head p {
+      max-width: 520px;
+    }
+
+    .kicker {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--brand-strong);
+      font-weight: 850;
+      margin-bottom: 8px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4.7rem);
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+    }
+
+    h3 {
+      font-size: 1.2rem;
+    }
+
+    p,
+    li {
+      color: var(--muted);
+    }
+
+    .card {
+      background: var(--surface);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.76);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .panel {
+      padding: 24px;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(18px);
+      background: rgba(255, 248, 251, 0.86);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 850;
+      color: var(--brand-deep);
+    }
+
+    .logo-mark {
+      flex: 0 0 auto;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: linear-gradient(135deg, #f8d7e3, #d98cab);
+      box-shadow: 0 10px 25px rgba(185, 94, 132, 0.16);
+      overflow: hidden;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.94rem;
+      padding: 10px 13px;
+      border-radius: 999px;
+      font-weight: 650;
+      transition: color 180ms ease, background 180ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--brand-deep);
+      background: rgba(217, 140, 171, 0.12);
+    }
+
+    .menu-btn {
+      display: none;
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 14px;
+      padding: 10px 12px;
+      cursor: pointer;
+      color: var(--brand-deep);
+      font-weight: 750;
+    }
+
+    .hero {
+      padding: 56px 0 32px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-side {
+      padding: 28px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.9rem;
+      font-weight: 750;
+      color: var(--brand-deep);
+      margin-bottom: 16px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--success);
+      box-shadow: 0 0 0 6px rgba(92, 168, 120, 0.14);
+    }
+
+    .lead {
+      font-size: 1.08rem;
+      max-width: 710px;
+      margin-bottom: 22px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .btn {
+      border: 1px solid transparent;
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 850;
+      cursor: pointer;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand-strong), var(--brand-deep));
+      color: white;
+      box-shadow: 0 12px 24px rgba(185, 94, 132, 0.18);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.76);
+      color: var(--brand-deep);
+      border-color: var(--line);
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--line);
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--brand-deep);
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .hero-side {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-box {
+      position: relative;
+      min-height: 430px;
+      height: 100%;
+      border-radius: 22px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(217, 140, 171, 0.12), rgba(185, 94, 132, 0.12)),
+        linear-gradient(135deg, #fde7ef, #f8cddb);
+      border: 1px solid var(--line);
+    }
+
+    .profile-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-fallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      text-align: center;
+      color: var(--brand-deep);
+    }
+
+    .profile-fallback p {
+      color: var(--brand-deep);
+      opacity: 0.8;
+    }
+
+    .profile-badge {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.86);
+      border-radius: 18px;
+      padding: 14px 16px;
+      backdrop-filter: blur(10px);
+      color: var(--muted);
+    }
+
+    .profile-badge strong {
+      color: var(--brand-deep);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .auto-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+      gap: 16px;
+    }
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+    }
+
+    .mini-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 850;
+      color: var(--brand-strong);
+      margin-bottom: 10px;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .info-list li {
+      list-style: none;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .info-list li::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--brand);
+      position: absolute;
+      left: 0;
+      top: 10px;
+    }
+
+    .skill-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .skill-item {
+      display: grid;
+      gap: 7px;
+    }
+
+    .skill-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-weight: 750;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .bar {
+      height: 10px;
+      border-radius: 999px;
+      background: #f7dde7;
+      overflow: hidden;
+    }
+
+    .bar>span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--brand), var(--brand-strong));
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: white;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
+      font-size: 0.95rem;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(112, 74, 102, 0.1);
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--brand-deep);
+      background: #fff6fa;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .education-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .education-card {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 18px;
+      align-items: center;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .education-logo {
+      width: 96px;
+      height: 96px;
+      border-radius: 22px;
+      background: white;
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 10px;
+    }
+
+    .education-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .education-logo-fallback {
+      font-weight: 900;
+      color: var(--brand-deep);
+      font-size: 1.1rem;
+    }
+
+    .education-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag-list {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .tag {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(217, 140, 171, 0.12);
+      color: var(--brand-deep);
+      font-weight: 750;
+      font-size: 0.9rem;
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+      gap: 14px;
+    }
+
+    .social-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.72);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .social-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
+      border-color: rgba(185, 94, 132, 0.28);
+    }
+
+    .social-icon {
+      width: 44px;
+      height: 44px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: var(--accent-soft);
+      color: var(--brand-deep);
+      font-weight: 900;
+    }
+
+    .social-card strong {
+      display: block;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .social-card span span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .interest-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+      gap: 16px;
+    }
+
+    .interest-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .interest-image {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      background: linear-gradient(135deg, #fde7ef, #f3bfd1);
+      overflow: hidden;
+    }
+
+    .interest-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .interest-fallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: var(--brand-deep);
+      font-weight: 900;
+      font-size: 2rem;
+      opacity: 0.78;
+    }
+
+    .interest-content {
+      padding: 18px;
+    }
+
+    .interest-content p {
+      margin-top: 6px;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+      gap: 18px;
+    }
+
+    .portfolio-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .portfolio-content {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .portfolio-content p {
+      margin-top: 6px;
+    }
+
+    .portfolio-frame-shell {
+      height: 420px;
+      background: white;
+      overflow: hidden;
+    }
+
+    .portfolio-frame-shell iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .small-note {
+      font-size: 0.92rem;
+      margin-top: 12px;
+    }
+
+    .contact-band {
+      padding: 28px;
+      background: linear-gradient(135deg, #f3bfd1, #d98cab);
+      color: #4a2a37;
+    }
+
+    .contact-band p {
+      color: rgba(74, 42, 55, 0.88);
+    }
+
+    .contact-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .contact-chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 750;
+      border: 1px solid rgba(74, 42, 55, 0.12);
+      background: rgba(255, 255, 255, 0.64);
+    }
+
+    footer {
+      padding: 26px 0 40px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 500ms ease, transform 500ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 960px) {
+
+      .hero-grid,
+      .visual-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .menu-btn {
+        display: inline-flex;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 72px;
+        left: 14px;
+        right: 14px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        background: rgba(255, 255, 255, 0.97);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 10px;
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 10px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section {
+        padding: 48px 0;
+      }
+
+      .accordion-stack {
+        padding: 34px 0 42px;
+      }
+
+      .accordion-card summary {
+        padding: 18px;
+      }
+
+      .accordion-content {
+        padding: 0 18px 18px;
+      }
+
+      .accordion-title span:first-child {
+        font-size: 1.05rem;
+      }
+
+      .hero-metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .hero-side,
+      .panel,
+      .contact-band {
+        padding: 20px;
+      }
+
+      .hero-actions,
+      .contact-actions {
+        flex-direction: column;
+      }
+
+      .btn,
+      .contact-chip {
+        width: 100%;
+      }
+
+      .profile-box {
+        min-height: 360px;
+      }
+
+      .education-card {
+        grid-template-columns: 1fr;
+      }
+
+      .education-logo {
+        width: 84px;
+        height: 84px;
+      }
+
+      .portfolio-content {
+        display: grid;
+      }
+
+      .portfolio-frame-shell {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+
+<body>
   <!--
-<section id="about" class="about">
-  <div class="container" data-aos="fade-up">
-    <div class="section-title">
-      <h2>About Me</h2>
-      <p>
-        I'm a dedicated professional with a strong foundation in software quality, business analysis, and project management. My career is driven by a passion for leveraging technology to exceed user and stakeholder expectations. Discover more about my journey and skills below.
-      </p>
+    FILES TO PREPARE IN YOUR PROJECT DIRECTORY
+
+    assets/profile-photo.jpg
+    assets/utm.png
+    assets/politeknik.png
+    assets/muay-thai.png
+    assets/surfing.png
+    assets/horseback-riding.png
+    assets/hiking.png
+
+    files/aimi-misman-cv.pdf
+  -->
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="brand-wrap" aria-label="Aimi Misman home">
+        <span>Aimi Misman</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#profile">Profile</a>
+        <a href="#skills-panel">Skills</a>
+        <a href="#education-panel">Education</a>
+        <a href="#tools-panel">Tools</a>
+        <a href="#socials-panel">Socials</a>
+        <a href="#interests-panel">Interests</a>
+        <a href="#portfolio-panel">Portfolio</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-label="Open navigation">Menu</button>
     </div>
+  </header>
 
-    <div class="row">
-      <div class="col-lg-4">
-        <img src="assets/img/profile-img.jpg" class="img-fluid" alt="" />
-      </div>
-      <div class="col-lg-8 pt-4 pt-lg-0 content">
-        <h3>Software QA, Business Analyst & Project Manager</h3>
-        <p class="fst-italic">
-          Combining expertise in QA, business analysis, and project management to drive innovation and excellence.
-        </p>
--->
-        <!-- Quick Facts Section -->
-        <!--
-        <div>
-          <h4>Quick Facts</h4>
-          <div class="row">
-            <div class="col-md-6">
-              <ul>
-                <li><strong>Birthday:</strong> 10 November 1995</li>
-              </ul>
-            </div>
-            <div class="col-md-6">
-              <ul>
-                <li><strong>City:</strong> Kuala Lumpur, Malaysia</li>
-              </ul>
-            </div>
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="card hero-copy reveal">
+          <div class="eyebrow">
+            <span class="dot"></span>
+            Technical Project Manager • Petaling Jaya, Malaysia
           </div>
+
+          <h1>Technical project leadership shaped by software engineering.</h1>
+
+          <p class="lead">
+            I bring together project delivery, technical coordination, QA readiness, and stakeholder alignment
+            to support structured digital platform execution.
+          </p>
+
+          <div class="hero-actions">
+            <a href="mailto:aimi.misman@gmail.com" class="btn btn-primary">Email Me</a>
+            <a href="aimi-misman-cv.pdf" class="btn btn-secondary" download>Download CV</a>
+            <a href="#profile" class="btn btn-secondary">Explore Profile</a>
+          </div>
+
+          
         </div>
 
-        <h4>My Journey</h4>
-        <p>
-          Embarking on a journey with a relentless pursuit of excellence, here's a snapshot of my professional path:
-        </p>
-        <ul>
-          <li><strong>.</strong> learning and adaptation to new methods and technologies.</li>
-          <li><strong>.</strong>Valuing collaboration and insights from diverse team environments.</li>
-          <li><strong>.</strong>Proven track record in improving software quality and user experience.</li>
-        </ul>
+        <aside class="card hero-side reveal">
+          <div class="profile-box">
+            <img src="profile-photo.jpg" alt="Aimi Misman profile photo" onerror="this.style.display='none'" />
 
-        <p>
-          With a mindset geared towards continuous improvement, I thrive in innovative and collaborative environments. I aim to not just meet, but exceed expectations, delivering forward-thinking solutions that make a lasting impact.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
--->
-<!-- End About Section -->
+            
 
-
-
-
-
-      <!-- ======= Facts Section ======= -->
-
-      <!-- 
-    <section id="facts" class="facts">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Facts</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-3 col-md-6">
-            <div class="count-box">
-              <i class="bi bi-emoji-smile"></i>
-              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Happy Clients</p>
+            <div class="profile-badge">
+              <strong>Aimi Misman</strong>
+              Project delivery, release governance, QA readiness, and technical coordination
             </div>
           </div>
-
-          <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
-            <div class="count-box">
-              <i class="bi bi-journal-richtext"></i>
-              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Projects</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
-            <div class="count-box">
-              <i class="bi bi-headset"></i>
-              <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Hours Of Support</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
-            <div class="count-box">
-              <i class="bi bi-award"></i>
-              <span data-purecounter-start="0" data-purecounter-end="25" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Awards</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>-->
-      <!-- End Facts Section -->
-
-      <!-- ======= Skills Section ======= -->
-      <!--
-    <section id="skills" class="skills section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Skills</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="row skills-content">
-
-          <div class="col-lg-6">
-
-            <div class="progress">
-              <span class="skill">HTML <i class="val">100%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">CSS <i class="val">90%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">JavaScript <i class="val">75%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="col-lg-6">
-
-            <div class="progress">
-              <span class="skill">PHP <i class="val">80%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">WordPress/CMS <i class="val">90%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">Photoshop <i class="val">55%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
+        </aside>
       </div>
     </section>
-  -->
-      <!-- End Skills Section -->
 
-      <!-- ======= Resume Section ======= -->
-      <section id="resume" class="resume">
-        <div class="container" data-aos="fade-up">
-          <div class="section-title">
-            <h2>Resume</h2>
-            <p>
-              I am a dedicated software quality assurance lead with a
-              comprehensive background in software development, QA engineering,
-              and project management. My expertise lies in implementing
-              strategic testing methodologies, leading teams to excellence, and
-              ensuring software meets the highest standards of quality and
-              performance.
-            </p>
-            <p>.</p>
-            <p><a href="assets/Aimi Misman - CV.pdf" download="Aimi Misman - CV.pdf" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Download My Full CV</a></p>
-          </div>
+    <section class="accordion-section" id="profile">
+      <div class="container accordion-stack">
+        <details class="card accordion-card reveal" open>
+          <summary>
+            <span class="accordion-title">
+              <span>About</span>
+              <span>Structured, technical, and delivery-focused profile</span>
+            </span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </summary>
 
-          <div class="row">
-            <div class="col-lg-6">
-              <h3 class="resume-title">Summary</h3>
-              <div class="resume-item pb-0">
-                <h4>Aimi Zafirah binti Misman</h4>
-                <p>
-                  <em
-                    >With a solid foundation in software quality assurance and a
-                    passion for technology, I am keen on leveraging my skills in
-                    software QA, business analysis, and project management to
-                    create impactful solutions.</em
-                  >
-                </p>
+          <div class="accordion-content">
+            <div class="section-head reveal">
+              <div>
+                <div class="kicker">About</div>
+                <h2>Structured, technical, and delivery-focused.</h2>
               </div>
 
-              <h3 class="resume-title">Education</h3>
-              <div class="resume-item">
-                <h4>BSc Computer Science (Software Engineering) - Part Time</h4>
-                <h5>2018 - Present</h5>
-                <p><em>Universiti Teknologi Malaysia</em></p>
-              </div>
-              <div class="resume-item">
-                <h4>Diploma in Electronic Engineering (Computer Technology)</h4>
-                <h5>Graduated December 2016</h5>
-                <p><em>Politeknik Port Dickson</em></p>
-              </div>
+              <p>
+                My professional profile centres on planning, coordinating, and communicating software delivery clearly
+                across business and technical teams.
+              </p>
             </div>
 
-            <div class="col-lg-6">
-              <h3 class="resume-title">Professional Experience</h3>
-              <div class="resume-item">
-                <h4>Software QA Lead</h4>
-                <h5>Tanalink Sdn Bhd - June 2023 - Present</h5>
-                <p><em>Kuala Lumpur, Malaysia</em></p>
-                <ul>
-                  <li>
-                    Lead the development and implementation of comprehensive
-                    software testing strategies and plans.
-                  </li>
-                  <li>
-                    Mentor and guide a team of software testers to ensure
-                    high-quality testing standards.
-                  </li>
-                  <li>
-                    Collaborate closely with development teams to identify and
-                    resolve potential issues early in the development cycle.
-                  </li>
+            <div class="auto-grid">
+              <article class="card panel reveal">
+                <div class="mini-title">Delivery Thinking</div>
+                <h3>Roadmap & Scope Control</h3>
+                <p>Defining scope, clarifying priorities, managing expectations, and keeping teams aligned around
+                  delivery outcomes.</p>
+              </article>
+
+              <article class="card panel reveal">
+                <div class="mini-title">Quality Mindset</div>
+                <h3>Release Readiness</h3>
+                <p>Supporting reliable delivery through validation planning, UAT coordination, risk visibility, and
+                  readiness checkpoints.</p>
+              </article>
+
+              <article class="card panel reveal">
+                <div class="mini-title">Technical Awareness</div>
+                <h3>System Coordination</h3>
+                <p>Comfortable working around APIs, backend systems, POS, CRM, loyalty platforms, payment flows, and
+                  delivery dependencies.</p>
+              </article>
+            </div>
+          </div>
+        </details>
+
+        <details class="card accordion-card reveal" id="skills-panel">
+          <summary>
+            <span class="accordion-title">
+              <span>Skills</span>
+              <span>Delivery, governance, technical coordination, and communication strengths</span>
+            </span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </summary>
+
+          <div class="accordion-content">
+            <div class="section-head reveal">
+              <div>
+                <div class="kicker">Skills</div>
+                <h2>Skillset overview.</h2>
+              </div>
+
+              <p>
+                A concise view of the strengths I apply across technical project management,
+                platform delivery, and stakeholder coordination.
+              </p>
+            </div>
+
+            <div class="visual-grid">
+              <div class="card panel reveal">
+                <div class="mini-title">Delivery Strengths</div>
+
+                <div class="skill-list">
+                  <div class="skill-item">
+                    <div class="skill-label"><span>Project Delivery & Coordination</span><span>95%</span></div>
+                    <div class="bar"><span style="width:95%"></span></div>
+                  </div>
+
+                  <div class="skill-item">
+                    <div class="skill-label"><span>Stakeholder Management</span><span>92%</span></div>
+                    <div class="bar"><span style="width:92%"></span></div>
+                  </div>
+
+                  <div class="skill-item">
+                    <div class="skill-label"><span>Release Planning & Risk Control</span><span>90%</span></div>
+                    <div class="bar"><span style="width:90%"></span></div>
+                  </div>
+
+                  <div class="skill-item">
+                    <div class="skill-label"><span>Backlog Prioritisation & Sprint Support</span><span>88%</span></div>
+                    <div class="bar"><span style="width:88%"></span></div>
+                  </div>
+
+                  <div class="skill-item">
+                    <div class="skill-label"><span>Cross-System Integration Oversight</span><span>86%</span></div>
+                    <div class="bar"><span style="width:86%"></span></div>
+                  </div>
+
+                  <div class="skill-item">
+                    <div class="skill-label"><span>UAT & Delivery Documentation</span><span>84%</span></div>
+                    <div class="bar"><span style="width:84%"></span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card panel reveal">
+                <div class="mini-title">Professional Capability Areas</div>
+
+                <ul class="info-list">
+                  <li>Project delivery and roadmap planning</li>
+                  <li>Stakeholder and vendor management</li>
+                  <li>Scope, budget, and cost alignment</li>
+                  <li>Hybrid Agile-Waterfall governance</li>
+                  <li>Release planning and risk control</li>
+                  <li>Cross-system integration oversight</li>
+                  <li>Backlog prioritisation and sprint tracking</li>
+                  <li>UAT and delivery documentation</li>
                 </ul>
               </div>
-              <div class="resume-item">
-                <h4>Software QA Engineer</h4>
-                <h5>
-                  CIS IT Solutions - September 2021 - June 2023
-                </h5>
-                <ul>
-                  <li>
-                    Engaged in building test plans, scenarios, and reporting,
-                    ensuring client software requirements were met.
-                  </li>
-                  <li>
-                    Identified, tested, and resolved bugs and coding issues,
-                    enhancing software quality and user satisfaction.
-                  </li>
-                </ul>
+            </div>
+
+            <div class="card panel reveal" style="margin-top:16px;">
+              <div class="mini-title">Skill Categories</div>
+
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Category</th>
+                      <th>Focus Areas</th>
+                      <th>Applied In</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td>Project Management</td>
+                      <td>Roadmap planning, scope control, timeline tracking, delivery governance</td>
+                      <td>Platform delivery, stakeholder updates, release planning</td>
+                    </tr>
+
+                    <tr>
+                      <td>Quality & Release</td>
+                      <td>Release readiness, test planning, UAT coordination, risk reporting</td>
+                      <td>Deployment preparation, validation cycles, readiness checks</td>
+                    </tr>
+
+                    <tr>
+                      <td>Technical Coordination</td>
+                      <td>APIs, backend logic, Azure, integrations, system dependencies</td>
+                      <td>Marketplace, CRM, POS, loyalty, payment flows</td>
+                    </tr>
+
+                    <tr>
+                      <td>Communication</td>
+                      <td>Stakeholder alignment, cross-functional coordination, documentation</td>
+                      <td>Product, BA, UI/UX, QA, client and vendor collaboration</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-              
             </div>
           </div>
-        </div>
-      </section>
+        </details>
 
-      <!-- End Resume Section -->
+        <details class="card accordion-card reveal" id="education-panel">
+          <summary>
+            <span class="accordion-title">
+              <span>Education</span>
+              <span>Computer Science, Software Engineering, and Electronic Engineering foundation</span>
+            </span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </summary>
 
-      <!-- ======= Portfolio Section ======= -->
-      <!-- 
-      <section id="portfolio" class="portfolio section-bg">
-        <div class="container" data-aos="fade-up">
-          <div class="section-title">
-            <h2>Portfolio</h2>
-            <p>
-              Magnam dolores commodi suscipit. Necessitatibus eius consequatur
-              ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam
-              quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea.
-              Quia fugiat sit in iste officiis commodi quidem hic quas.
+          <div class="accordion-content">
+            <div class="section-head reveal">
+              <div>
+                <div class="kicker">Education</div>
+                <h2>Academic background.</h2>
+              </div>
+
+              <p>
+                A blend of software engineering and electronic engineering foundations that supports both technical
+                understanding
+                and structured problem-solving.
+              </p>
+            </div>
+
+            <div class="education-grid">
+              <article class="education-card reveal">
+                <div class="education-logo">
+                  <img src="utm.png" alt="Universiti Teknologi Malaysia logo"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                  <span class="education-logo-fallback" style="display:none;">UTM</span>
+                </div>
+
+                <div>
+                  <div class="mini-title">Universiti Teknologi Malaysia</div>
+                  <h3>BSc Computer Science, Software Engineering</h3>
+                  <p>2018 – Present</p>
+
+                  <div class="education-meta">
+                    <span class="tag">Software Engineering</span>
+                    <span class="tag">Computer Science</span>
+                    <span class="tag">Digital Systems</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="education-card reveal">
+                <div class="education-logo">
+                  <img src="politeknik.png" alt="Politeknik Port Dickson logo"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                  <span class="education-logo-fallback" style="display:none;">PPD</span>
+                </div>
+
+                <div>
+                  <div class="mini-title">Politeknik Port Dickson</div>
+                  <h3>Diploma in Electronic Engineering, Computer Technology</h3>
+                  <p>2013 – 2016</p>
+
+                  <div class="education-meta">
+                    <span class="tag">Electronic Engineering</span>
+                    <span class="tag">Computer Technology</span>
+                    <span class="tag">Technical Foundation</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </details>
+
+        <details class="card accordion-card reveal" id="tools-panel">
+          <summary>
+            <span class="accordion-title">
+              <span>Tools & Platforms</span>
+              <span>Project, collaboration, technical, QA, and business system tools</span>
+            </span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </summary>
+
+          <div class="accordion-content">
+            <div class="section-head reveal">
+              <div>
+                <div class="kicker">Tools & Platforms</div>
+                <h2>Hands-on toolset.</h2>
+              </div>
+
+              <p>
+                Tools and platforms used across delivery management, technical coordination, testing, and business
+                system workflows.
+              </p>
+            </div>
+
+            <div class="auto-grid">
+              <div class="card panel reveal">
+                <div class="mini-title">Project & Collaboration</div>
+
+                <div class="tag-list">
+                  <span class="tag">JIRA</span>
+                  <span class="tag">Trello</span>
+                  <span class="tag">ClickUp</span>
+                  <span class="tag">Microsoft 365</span>
+                  <span class="tag">Google Workspace</span>
+                  <span class="tag">WhatsApp Business</span>
+                </div>
+              </div>
+
+              <div class="card panel reveal">
+                <div class="mini-title">Technical & QA</div>
+
+                <div class="tag-list">
+                  <span class="tag">Git</span>
+                  <span class="tag">Postman</span>
+                  <span class="tag">Microsoft Azure</span>
+                  <span class="tag">.NET Framework</span>
+                  <span class="tag">REST APIs</span>
+                  <span class="tag">Selenium</span>
+                  <span class="tag">CI/CD Pipelines</span>
+                </div>
+              </div>
+
+              <div class="card panel reveal">
+                <div class="mini-title">Business Systems</div>
+
+                <div class="tag-list">
+                  <span class="tag">CRM</span>
+                  <span class="tag">POS Systems</span>
+                  <span class="tag">Loyalty Program Systems</span>
+                  <span class="tag">Stripe Webhook Integration</span>
+                  <span class="tag">SCCM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="card accordion-card reveal" id="socials-panel">
+          <summary>
+            <span class="accordion-title">
+              <span>Social Media</span>
+              <span>Professional profiles, code platforms, and social links</span>
+            </span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </summary>
+
+          <div class="accordion-content">
+            <div class="section-head reveal">
+              <div>
+                <div class="kicker">Social Media</div>
+                <h2>Connect with me online.</h2>
+              </div>
+
+              <p>
+                Professional and social profiles can be added here as your online presence grows.
+              </p>
+            </div>
+
+            <div class="social-grid">
+  <a class="social-card reveal" href="https://www.linkedin.com/" target="_blank" rel="noopener">
+    <span>
+      <strong>LinkedIn</strong>
+      <span>Professional profile</span>
+    </span>
+  </a>
+
+  <a class="social-card reveal" href="https://github.com/" target="_blank" rel="noopener">
+    <span>
+      <strong>GitHub</strong>
+      <span>Code and technical work</span>
+    </span>
+  </a>
+
+  <a class="social-card reveal" href="https://www.kaggle.com/" target="_blank" rel="noopener">
+    <span>
+      <strong>Kaggle</strong>
+      <span>Data projects and notebooks</span>
+    </span>
+  </a>
+
+  <a class="social-card reveal" href="https://www.instagram.com/" target="_blank" rel="noopener">
+    <span>
+      <strong>Instagram</strong>
+      <span>Personal updates</span>
+    </span>
+  </a>
+</div>
+          </div>
+        </details>
+
+        <details class="card accordion-card reveal" id="interests-panel">
+          <summary>
+            <span class="accordion-title">
+              <span>Sports & Interests</span>
+              <span>Activities that keep me active, focused, and adventurous</span>
+            </span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </summary>
+
+          <div class="accordion-content">
+            <div class="section-head reveal">
+              <div>
+                <div class="kicker">Sports & Interests</div>
+                <h2>Outside the workspace.</h2>
+              </div>
+
+              <p>
+                I enjoy activities that build discipline, confidence, balance, and appreciation for the outdoors.
+              </p>
+            </div>
+
+            <div class="interest-grid">
+              <article class="interest-card reveal">
+                <div class="interest-image">
+                  <img src="muay-thai.png" alt="Muay Thai" onerror="this.style.display='none'" />
+                  
+                </div>
+
+                <div class="interest-content">
+                  <div class="mini-title">Discipline & Focus</div>
+                  <h3>Muay Thai</h3>
+                  <p>Training that develops consistency, resilience, coordination, and mental sharpness.</p>
+                </div>
+              </article>
+
+              <article class="interest-card reveal">
+                <div class="interest-image">
+                  <img src="surfing.png" alt="Surfing" onerror="this.style.display='none'" />
+                  
+                </div>
+
+                <div class="interest-content">
+                  <div class="mini-title">Balance & Adaptability</div>
+                  <h3>Surfing</h3>
+                  <p>An interest that reflects patience, timing, adaptability, and comfort with changing conditions.</p>
+                </div>
+              </article>
+
+              <article class="interest-card reveal">
+                <div class="interest-image">
+                  <img src="horseback-riding.png" alt="Horseback riding" onerror="this.style.display='none'" />
+                  
+                </div>
+
+                <div class="interest-content">
+                  <div class="mini-title">Confidence & Control</div>
+                  <h3>Horseback Riding</h3>
+                  <p>A grounding activity that combines calm communication, trust, posture, and controlled movement.</p>
+                </div>
+              </article>
+
+              <article class="interest-card reveal">
+                <div class="interest-image">
+                  <img src="hiking.png" alt="Hiking" onerror="this.style.display='none'" />
+                  
+                </div>
+
+                <div class="interest-content">
+                  <div class="mini-title">Endurance & Exploration</div>
+                  <h3>Hiking</h3>
+                  <p>A way to recharge through nature, build endurance, and enjoy steady progress one step at a time.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </details>
+
+        <details class="card accordion-card reveal" id="portfolio-panel">
+          <summary>
+            <span class="accordion-title">
+              <span>Project Portfolio</span>
+              <span>Websites, platforms, and digital products I have contributed to</span>
+            </span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </summary>
+
+          <div class="accordion-content">
+            <div class="section-head reveal">
+              <div>
+                <div class="kicker">Portfolio</div>
+                <h2>Selected project showcases.</h2>
+              </div>
+
+              <p>
+                A live preview gallery for websites, platforms, and digital products I have worked on or contributed to.
+              </p>
+            </div>
+
+            <div class="portfolio-grid">
+              <article class="portfolio-card reveal">
+                <div class="portfolio-content">
+                  <div>
+                    <div class="mini-title">Local Produce Marketplace</div>
+                    <h3>Keboon</h3>
+                    <p>
+                      A local produce marketplace concept connecting home gardeners, urban farmers,
+                      and eco-conscious consumers, with a broader platform vision around community produce,
+                      growing tips, and rewards.
+                    </p>
+                  </div>
+
+                  <a class="btn btn-secondary" href="https://keboon.net" target="_blank" rel="noopener">
+                    Visit
+                  </a>
+                </div>
+
+                <div class="portfolio-frame-shell">
+                  <iframe src="https://keboon.net" title="Project preview: Keboon" loading="lazy">
+                  </iframe>
+                </div>
+              </article>
+
+              <article class="portfolio-card reveal">
+                <div class="portfolio-content">
+                  <div>
+                    <div class="mini-title">Healthcare Platform</div>
+                    <h3>KitaCare Malaysia</h3>
+                    <p>
+                      A Malaysian home care platform connecting families with verified caregivers,
+                      private nurses, and house-call doctors, including booking management and professional matching.
+                    </p>
+                  </div>
+
+                  <a class="btn btn-secondary" href="https://mykitacare.com" target="_blank" rel="noopener">
+                    Visit
+                  </a>
+                </div>
+
+                <div class="portfolio-frame-shell">
+                  <iframe src="https://mykitacare.com" title="Project preview: KitaCare Malaysia" loading="lazy">
+                  </iframe>
+                </div>
+              </article>
+
+              <article class="portfolio-card reveal">
+                <div class="portfolio-content">
+                  <div>
+                    <div class="mini-title">Wellness Retreat</div>
+                    <h3>Langkawi Serenity</h3>
+                    <p>
+                      A premium 4D3N Langkawi wellness retreat experience covering curated island activities,
+                      retreat scheduling, package selection, and optional KL-to-Langkawi travel planning.
+                    </p>
+                  </div>
+
+                  <a class="btn btn-secondary" href="https://langkawi-serenity.com" target="_blank" rel="noopener">
+                    Visit
+                  </a>
+                </div>
+
+                <div class="portfolio-frame-shell">
+                  <iframe src="https://langkawi-serenity.com" title="Project preview: Langkawi Serenity" loading="lazy">
+                  </iframe>
+                </div>
+              </article>
+              <article class="portfolio-card reveal">
+                <div class="portfolio-content">
+                  <div>
+                    <div class="mini-title">Care Companion Platform</div>
+                    <h3>Teman Malaysia</h3>
+                    <p>
+                      A Malaysian care companion platform that helps families arrange trusted support for
+                      loved ones, including health appointment assistance, dialysis support, home care
+                      companionship, transport assistance, and caregiver matching.
+                    </p>
+                  </div>
+
+                  <a class="btn btn-secondary" href="https://temanmalaysia.com" target="_blank" rel="noopener">
+                    Visit
+                  </a>
+                </div>
+
+                <div class="portfolio-frame-shell">
+                  <iframe src="https://temanmalaysia.com" title="Project preview: Teman Malaysia" loading="lazy">
+                  </iframe>
+                </div>
+              </article>
+            </div>
+
+            <p class="small-note">
+              Some websites may block embedded previews. The external site button remains available for each project.
             </p>
           </div>
-
-          <div class="row">
-            <div
-              class="col-lg-12 d-flex justify-content-center"
-              data-aos="fade-up"
-              data-aos-delay="100"
-            >
-              <ul id="portfolio-flters">
-                <li data-filter="*" class="filter-active">All</li>
-                <li data-filter=".filter-app">App</li>
-                <li data-filter=".filter-card">Card</li>
-                <li data-filter=".filter-web">Web</li>
-              </ul>
-            </div>
-          </div>
-
-          <div
-            class="row portfolio-container"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-              <div class="portfolio-wrap">
-                <img
-                  src="assets/img/portfolio/portfolio-1.jpg"
-                  class="img-fluid"
-                  alt=""
-                />
-                <div class="portfolio-info">
-                  <h4>App 1</h4>
-                  <p>App</p>
-                  <div class="portfolio-links">
-                    <a
-                      href="assets/img/portfolio/portfolio-1.jpg"
-                      data-gallery="portfolioGallery"
-                      class="portfolio-lightbox"
-                      title="App 1"
-                      ><i class="bx bx-plus"></i
-                    ></a>
-                    <a
-                      href="portfolio-details.html"
-                      class="portfolio-details-lightbox"
-                      data-glightbox="type: external"
-                      title="Portfolio Details"
-                      ><i class="bx bx-link"></i
-                    ></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-              <div class="portfolio-wrap">
-                <img
-                  src="assets/img/portfolio/portfolio-2.jpg"
-                  class="img-fluid"
-                  alt=""
-                />
-                <div class="portfolio-info">
-                  <h4>Web 3</h4>
-                  <p>Web</p>
-                  <div class="portfolio-links">
-                    <a
-                      href="assets/img/portfolio/portfolio-2.jpg"
-                      data-gallery="portfolioGallery"
-                      class="portfolio-lightbox"
-                      title="Web 3"
-                      ><i class="bx bx-plus"></i
-                    ></a>
-                    <a
-                      href="portfolio-details.html"
-                      class="portfolio-details-lightbox"
-                      data-glightbox="type: external"
-                      title="Portfolio Details"
-                      ><i class="bx bx-link"></i
-                    ></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-              <div class="portfolio-wrap">
-                <img
-                  src="assets/img/portfolio/portfolio-3.jpg"
-                  class="img-fluid"
-                  alt=""
-                />
-                <div class="portfolio-info">
-                  <h4>App 2</h4>
-                  <p>App</p>
-                  <div class="portfolio-links">
-                    <a
-                      href="assets/img/portfolio/portfolio-3.jpg"
-                      data-gallery="portfolioGallery"
-                      class="portfolio-lightbox"
-                      title="App 2"
-                      ><i class="bx bx-plus"></i
-                    ></a>
-                    <a
-                      href="portfolio-details.html"
-                      class="portfolio-details-lightbox"
-                      data-glightbox="type: external"
-                      title="Portfolio Details"
-                      ><i class="bx bx-link"></i
-                    ></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-              <div class="portfolio-wrap">
-                <img
-                  src="assets/img/portfolio/portfolio-4.jpg"
-                  class="img-fluid"
-                  alt=""
-                />
-                <div class="portfolio-info">
-                  <h4>Card 2</h4>
-                  <p>Card</p>
-                  <div class="portfolio-links">
-                    <a
-                      href="assets/img/portfolio/portfolio-4.jpg"
-                      data-gallery="portfolioGallery"
-                      class="portfolio-lightbox"
-                      title="Card 2"
-                      ><i class="bx bx-plus"></i
-                    ></a>
-                    <a
-                      href="portfolio-details.html"
-                      class="portfolio-details-lightbox"
-                      data-glightbox="type: external"
-                      title="Portfolio Details"
-                      ><i class="bx bx-link"></i
-                    ></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-              <div class="portfolio-wrap">
-                <img
-                  src="assets/img/portfolio/portfolio-5.jpg"
-                  class="img-fluid"
-                  alt=""
-                />
-                <div class="portfolio-info">
-                  <h4>Web 2</h4>
-                  <p>Web</p>
-                  <div class="portfolio-links">
-                    <a
-                      href="assets/img/portfolio/portfolio-5.jpg"
-                      data-gallery="portfolioGallery"
-                      class="portfolio-lightbox"
-                      title="Web 2"
-                      ><i class="bx bx-plus"></i
-                    ></a>
-                    <a
-                      href="portfolio-details.html"
-                      class="portfolio-details-lightbox"
-                      data-glightbox="type: external"
-                      title="Portfolio Details"
-                      ><i class="bx bx-link"></i
-                    ></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-              <div class="portfolio-wrap">
-                <img
-                  src="assets/img/portfolio/portfolio-6.jpg"
-                  class="img-fluid"
-                  alt=""
-                />
-                <div class="portfolio-info">
-                  <h4>App 3</h4>
-                  <p>App</p>
-                  <div class="portfolio-links">
-                    <a
-                      href="assets/img/portfolio/portfolio-6.jpg"
-                      data-gallery="portfolioGallery"
-                      class="portfolio-lightbox"
-                      title="App 3"
-                      ><i class="bx bx-plus"></i
-                    ></a>
-                    <a
-                      href="portfolio-details.html"
-                      class="portfolio-details-lightbox"
-                      data-glightbox="type: external"
-                      title="Portfolio Details"
-                      ><i class="bx bx-link"></i
-                    ></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-              <div class="portfolio-wrap">
-                <img
-                  src="assets/img/portfolio/portfolio-7.jpg"
-                  class="img-fluid"
-                  alt=""
-                />
-                <div class="portfolio-info">
-                  <h4>Card 1</h4>
-                  <p>Card</p>
-                  <div class="portfolio-links">
-                    <a
-                      href="assets/img/portfolio/portfolio-7.jpg"
-                      data-gallery="portfolioGallery"
-                      class="portfolio-lightbox"
-                      title="Card 1"
-                      ><i class="bx bx-plus"></i
-                    ></a>
-                    <a
-                      href="portfolio-details.html"
-                      class="portfolio-details-lightbox"
-                      data-glightbox="type: external"
-                      title="Portfolio Details"
-                      ><i class="bx bx-link"></i
-                    ></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-              <div class="portfolio-wrap">
-                <img
-                  src="assets/img/portfolio/portfolio-8.jpg"
-                  class="img-fluid"
-                  alt=""
-                />
-                <div class="portfolio-info">
-                  <h4>Card 3</h4>
-                  <p>Card</p>
-                  <div class="portfolio-links">
-                    <a
-                      href="assets/img/portfolio/portfolio-8.jpg"
-                      data-gallery="portfolioGallery"
-                      class="portfolio-lightbox"
-                      title="Card 3"
-                      ><i class="bx bx-plus"></i
-                    ></a>
-                    <a
-                      href="portfolio-details.html"
-                      class="portfolio-details-lightbox"
-                      data-glightbox="type: external"
-                      title="Portfolio Details"
-                      ><i class="bx bx-link"></i
-                    ></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-              <div class="portfolio-wrap">
-                <img
-                  src="assets/img/portfolio/portfolio-9.jpg"
-                  class="img-fluid"
-                  alt=""
-                />
-                <div class="portfolio-info">
-                  <h4>Web 3</h4>
-                  <p>Web</p>
-                  <div class="portfolio-links">
-                    <a
-                      href="assets/img/portfolio/portfolio-9.jpg"
-                      data-gallery="portfolioGallery"
-                      class="portfolio-lightbox"
-                      title="Web 3"
-                      ><i class="bx bx-plus"></i
-                    ></a>
-                    <a
-                      href="portfolio-details.html"
-                      class="portfolio-details-lightbox"
-                      data-glightbox="type: external"
-                      title="Portfolio Details"
-                      ><i class="bx bx-link"></i
-                    ></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      -->
-      <!-- End Portfolio Section -->
-
-      <!-- ======= Services Section ======= -->
-      <!-- 
-      <section id="services" class="services">
-        <div class="container" data-aos="fade-up">
-          <div class="section-title">
-            <h2>Services</h2>
-            <p>
-              Magnam dolores commodi suscipit. Necessitatibus eius consequatur
-              ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam
-              quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea.
-              Quia fugiat sit in iste officiis commodi quidem hic quas.
-            </p>
-          </div>
-
-          <div class="row">
-            <div
-              class="col-lg-4 col-md-6 d-flex align-items-stretch"
-              data-aos="zoom-in"
-              data-aos-delay="100"
-            >
-              <div class="icon-box iconbox-blue">
-                <div class="icon">
-                  <svg
-                    width="100"
-                    height="100"
-                    viewBox="0 0 600 600"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke="none"
-                      stroke-width="0"
-                      fill="#f5f5f5"
-                      d="M300,521.0016835830174C376.1290562159157,517.8887921683347,466.0731472004068,529.7835943286574,510.70327084640275,468.03025145048787C554.3714126377745,407.6079735673963,508.03601936045806,328.9844924480964,491.2728898941984,256.3432110539036C474.5976632858925,184.082847569629,479.9380746630129,96.60480741107993,416.23090153303,58.64404602377083C348.86323505073057,18.502131276798302,261.93793281208167,40.57373210992963,193.5410806939664,78.93577620505333C130.42746243093433,114.334589627462,98.30271207620316,179.96522072025542,76.75703585869454,249.04625023123273C51.97151888228291,328.5150500222984,13.704378332031375,421.85034740162234,66.52175969318436,486.19268352777647C119.04800174914682,550.1803526380478,217.28368757567262,524.383925680826,300,521.0016835830174"
-                    ></path>
-                  </svg>
-                  <i class="bx bxl-dribbble"></i>
-                </div>
-                <h4><a href="">Lorem Ipsum</a></h4>
-                <p>
-                  Voluptatum deleniti atque corrupti quos dolores et quas
-                  molestias excepturi
-                </p>
-              </div>
-            </div>
-
-            <div
-              class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-            >
-              <div class="icon-box iconbox-orange">
-                <div class="icon">
-                  <svg
-                    width="100"
-                    height="100"
-                    viewBox="0 0 600 600"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke="none"
-                      stroke-width="0"
-                      fill="#f5f5f5"
-                      d="M300,582.0697525312426C382.5290701553225,586.8405444964366,449.9789794690241,525.3245884688669,502.5850820975895,461.55621195738473C556.606425686781,396.0723002908107,615.8543463187945,314.28637112970534,586.6730223649479,234.56875336149918C558.9533121215079,158.8439757836574,454.9685369536778,164.00468322053177,381.49747125262974,130.76875717737553C312.15926192815925,99.40240125094834,248.97055460311594,18.661163978235184,179.8680185752513,50.54337015887873C110.5421016452524,82.52863877960104,119.82277516462835,180.83849132639028,109.12597500060166,256.43424936330496C100.08760227029461,320.3096726198365,92.17705696193138,384.0621239912766,124.79988738764834,439.7174275375508C164.83382741302287,508.01625554203684,220.96474134820875,577.5009287672846,300,582.0697525312426"
-                    ></path>
-                  </svg>
-                  <i class="bx bx-file"></i>
-                </div>
-                <h4><a href="">Sed Perspiciatis</a></h4>
-                <p>
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse
-                  cillum dolore
-                </p>
-              </div>
-            </div>
-
-            <div
-              class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0"
-              data-aos="zoom-in"
-              data-aos-delay="300"
-            >
-              <div class="icon-box iconbox-pink">
-                <div class="icon">
-                  <svg
-                    width="100"
-                    height="100"
-                    viewBox="0 0 600 600"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke="none"
-                      stroke-width="0"
-                      fill="#f5f5f5"
-                      d="M300,541.5067337569781C382.14930387511276,545.0595476570109,479.8736841581634,548.3450877840088,526.4010558755058,480.5488172755941C571.5218469581645,414.80211281144784,517.5187510058486,332.0715597781072,496.52539010469104,255.14436215662573C477.37192572678356,184.95920475031193,473.57363656557914,105.61284051026155,413.0603344069578,65.22779650032875C343.27470386102294,18.654635553484475,251.2091493199835,5.337323636656869,175.0934190732945,40.62881213300186C97.87086631185822,76.43348514350839,51.98124368387456,156.15599469081315,36.44837278890362,239.84606092416172C21.716077023791087,319.22268207091537,43.775223500013084,401.1760424656574,96.891909868211,461.97329694683043C147.22146801428983,519.5804099606455,223.5754009179313,538.201503339737,300,541.5067337569781"
-                    ></path>
-                  </svg>
-                  <i class="bx bx-tachometer"></i>
-                </div>
-                <h4><a href="">Magni Dolores</a></h4>
-                <p>
-                  Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                  qui officia
-                </p>
-              </div>
-            </div>
-
-            <div
-              class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4"
-              data-aos="zoom-in"
-              data-aos-delay="100"
-            >
-              <div class="icon-box iconbox-yellow">
-                <div class="icon">
-                  <svg
-                    width="100"
-                    height="100"
-                    viewBox="0 0 600 600"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke="none"
-                      stroke-width="0"
-                      fill="#f5f5f5"
-                      d="M300,503.46388370962813C374.79870501325706,506.71871716319447,464.8034551963731,527.1746412648533,510.4981551193396,467.86667711651364C555.9287308511215,408.9015244558933,512.6030010748507,327.5744911775523,490.211057578863,256.5855673507754C471.097692560561,195.9906835881958,447.69079081568157,138.11976852964426,395.19560036434837,102.3242989838813C329.3053358748298,57.3949838291264,248.02791733380457,8.279543830951368,175.87071277845988,42.242879143198664C103.41431057327972,76.34704239035025,93.79494320519305,170.9812938413882,81.28167332365135,250.07896920659033C70.17666984294237,320.27484674793965,64.84698225790005,396.69656628748305,111.28512138212992,450.4950937839243C156.20124167950087,502.5303643271138,231.32542653798444,500.4755392045468,300,503.46388370962813"
-                    ></path>
-                  </svg>
-                  <i class="bx bx-layer"></i>
-                </div>
-                <h4><a href="">Nemo Enim</a></h4>
-                <p>
-                  At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                  blanditiis
-                </p>
-              </div>
-            </div>
-
-            <div
-              class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-            >
-              <div class="icon-box iconbox-red">
-                <div class="icon">
-                  <svg
-                    width="100"
-                    height="100"
-                    viewBox="0 0 600 600"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke="none"
-                      stroke-width="0"
-                      fill="#f5f5f5"
-                      d="M300,532.3542879108572C369.38199826031484,532.3153073249985,429.10787420159085,491.63046689027357,474.5244479745417,439.17860296908856C522.8885846962883,383.3225815378663,569.1668002868075,314.3205725914397,550.7432151929288,242.7694973846089C532.6665558377875,172.5657663291529,456.2379748765914,142.6223662098291,390.3689995646985,112.34683881706744C326.66090330228417,83.06452184765237,258.84405631176094,53.51806209861945,193.32584062364296,78.48882559362697C121.61183558270385,105.82097193414197,62.805066853699245,167.19869350419734,48.57481801355237,242.6138429142374C34.843463184063346,315.3850353017275,76.69343916112496,383.4422959591041,125.22947124332185,439.3748458443577C170.7312796277747,491.8107796887764,230.57421082200815,532.3932930995766,300,532.3542879108572"
-                    ></path>
-                  </svg>
-                  <i class="bx bx-slideshow"></i>
-                </div>
-                <h4><a href="">Dele Cardo</a></h4>
-                <p>
-                  Quis consequatur saepe eligendi voluptatem consequatur dolor
-                  consequuntur
-                </p>
-              </div>
-            </div>
-
-            <div
-              class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4"
-              data-aos="zoom-in"
-              data-aos-delay="300"
-            >
-              <div class="icon-box iconbox-teal">
-                <div class="icon">
-                  <svg
-                    width="100"
-                    height="100"
-                    viewBox="0 0 600 600"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke="none"
-                      stroke-width="0"
-                      fill="#f5f5f5"
-                      d="M300,566.797414625762C385.7384707136149,576.1784315230908,478.7894351017131,552.8928747891023,531.9192734346935,484.94944893311C584.6109503024035,417.5663521118492,582.489472248146,322.67544863468447,553.9536738515405,242.03673114598146C529.1557734026468,171.96086150256528,465.24506316201064,127.66468636344209,395.9583748389544,100.7403814666027C334.2173773831606,76.7482773500951,269.4350130405921,84.62216499799875,207.1952322260088,107.2889140133804C132.92018162631612,134.33871894543012,41.79353780512637,160.00259165414826,22.644507872594943,236.69541883565114C3.319112789854554,314.0945973066697,72.72355303640163,379.243833228382,124.04198916343866,440.3218312028393C172.9286146004772,498.5055451809895,224.45579914871206,558.5317968840102,300,566.797414625762"
-                    ></path>
-                  </svg>
-                  <i class="bx bx-arch"></i>
-                </div>
-                <h4><a href="">Divera Don</a></h4>
-                <p>
-                  Modi nostrum vel laborum. Porro fugit error sit minus sapiente
-                  sit aspernatur
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      -->
-      <!-- End Services Section -->
-
-      <!-- ======= Testimonials Section ======= -->
-      <!--
-      <section id="testimonials" class="testimonials section-bg">
-        <div class="container" data-aos="fade-up">
-          <div class="section-title">
-            <h2>Testimonials</h2>
-          </div>
-
-          <div
-            class="testimonials-slider swiper"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <img
-                    src="assets/img/testimonials/testimonials-1.jpg"
-                    class="testimonial-img"
-                    alt=""
-                  />
-                  <h3>Saul Goodman</h3>
-                  <h4>Ceo &amp; Founder</h4>
-                  <p>
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Proin iaculis purus consequat sem cure digni ssim donec
-                    porttitora entum suscipit rhoncus. Accusantium quam,
-                    ultricies eget id, aliquam eget nibh et. Maecen aliquam,
-                    risus at semper.
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-              -->
-      <!-- End testimonial item -->
-      <!--
-
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <img
-                    src="assets/img/testimonials/testimonials-2.jpg"
-                    class="testimonial-img"
-                    alt=""
-                  />
-                  <h3>Sara Wilsson</h3>
-                  <h4>Designer</h4>
-                  <p>
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Export tempor illum tamen malis malis eram quae irure esse
-                    labore quem cillum quid cillum eram malis quorum velit fore
-                    eram velit sunt aliqua noster fugiat irure amet legam anim
-                    culpa.
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-              -->
-      <!-- End testimonial item -->
-      <!--
-
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <img
-                    src="assets/img/testimonials/testimonials-3.jpg"
-                    class="testimonial-img"
-                    alt=""
-                  />
-                  <h3>Jena Karlis</h3>
-                  <h4>Store Owner</h4>
-                  <p>
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Enim nisi quem export duis labore cillum quae magna enim
-                    sint quorum nulla quem veniam duis minim tempor labore quem
-                    eram duis noster aute amet eram fore quis sint minim.
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-              -->
-      <!-- End testimonial item -->
-      <!--
-
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <img
-                    src="assets/img/testimonials/testimonials-4.jpg"
-                    class="testimonial-img"
-                    alt=""
-                  />
-                  <h3>Aimi Misman</h3>
-                  <h4>Freelancer</h4>
-                  <p>
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Fugiat enim eram quae cillum dolore dolor amet nulla culpa
-                    multos export minim fugiat minim velit minim dolor enim duis
-                    veniam ipsum anim magna sunt elit fore quem dolore labore
-                    illum veniam.
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-              -->
-      <!-- End testimonial item -->
-      <!--
-
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <img
-                    src="assets/img/testimonials/testimonials-5.jpg"
-                    class="testimonial-img"
-                    alt=""
-                  />
-                  <h3>John Larson</h3>
-                  <h4>Entrepreneur</h4>
-                  <p>
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Quis quorum aliqua sint quem legam fore sunt eram irure
-                    aliqua veniam tempor noster veniam enim culpa labore duis
-                    sunt culpa nulla illum cillum fugiat legam esse veniam culpa
-                    fore nisi cillum quid.
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-              -->
-      <!-- End testimonial item -->
-      <!-- 
-            </div>
-            <div class="swiper-pagination"></div>
-          </div>
-        </div>
-      </section>
-      -->
-      <!-- End Testimonials Section -->
-
-      <!-- ======= Contact Section ======= -->
-      <section id="contact" class="contact">
-        <div class="container" data-aos="fade-up">
-          <div class="section-title">
-            <h2>Contact</h2>
-          </div>
-
-          <div class="row mt-1">
-            <div class="col-lg-4">
-              <div class="info">
-                <div class="address">
-                  <i class="bi bi-geo-alt"></i>
-                  <h4>Location:</h4>
-                  <p>Kuala Lumpur, Malaysia</p>
-                </div>
-
-                <div class="email">
-                  <i class="bi bi-envelope"></i>
-                  <h4>Email:</h4>
-                  <p>aimi.misman@outlook.com</p>
-                </div>
-
-                <div class="phone">
-                  <i class="bi bi-phone"></i>
-                  <h4>Call:</h4>
-                  <p>+60 192584291</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-8 mt-5 mt-lg-0">
-              <form
-                action="https://formspree.io/f/xgegzloe"
-                method="POST"
-                role="form"
-                class="php-email-form"
-              >
-                <div class="row">
-                  <div class="col-md-6 form-group">
-                    <input
-                      type="text"
-                      name="name"
-                      class="form-control"
-                      id="name"
-                      placeholder="Your Name"
-                      required
-                    />
-                  </div>
-                  <div class="col-md-6 form-group mt-3 mt-md-0">
-                    <input
-                      type="email"
-                      class="form-control"
-                      name="_replyto"
-                      id="email"
-                      placeholder="Your Email"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="form-group mt-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="subject"
-                    id="subject"
-                    placeholder="Subject"
-                    required
-                  />
-                </div>
-                <div class="form-group mt-3">
-                  <textarea
-                    class="form-control"
-                    name="message"
-                    rows="5"
-                    placeholder="Message"
-                    required
-                  ></textarea>
-                </div>
-                <div class="my-3">
-                  <div class="loading">Loading</div>
-                  <div class="error-message" style="display: none"></div>
-                  <div class="sent-message" style="display: none">
-                    Your message has been sent. Thank you!
-                  </div>
-                </div>
-                <div class="text-center">
-                  <button type="submit">Send Message</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-      <script>
-        document.addEventListener("DOMContentLoaded", function() {
-          var form = document.querySelector(".php-email-form");
-          form.addEventListener("submit", function(e) {
-            e.preventDefault();
-            var formData = new FormData(form);
-        
-            // Hide messages initially
-            var loadingMessage = document.querySelector(".loading");
-            var errorMessage = document.querySelector(".error-message");
-            var sentMessage = document.querySelector(".sent-message");
-            loadingMessage.style.display = "none";
-            errorMessage.style.display = "none";
-            sentMessage.style.display = "none";
-        
-            fetch(form.action, {
-              method: "POST",
-              body: formData,
-              headers: {
-                'Accept': 'application/json'
-              },
-            }).then(response => response.json()) // Convert the response to JSON
-              .then(responseJson => {
-                if (responseJson.ok) {
-                  // Success
-                  sentMessage.style.display = "block";
-                  form.reset(); // Reset the form fields
-                } else {
-                  // Server responded with 'ok: false'
-                  errorMessage.textContent = "There was a problem with your submission. Please try again.";
-                  errorMessage.style.display = "block";
-                }
-              }).catch(error => {
-                // Network error or no response from server
-                console.error('Error:', error);
-                errorMessage.textContent = "There was a problem with your submission. Please try again.";
-                errorMessage.style.display = "block";
-              });
-          });
-        });
-        </script>
-        
-
-      <!-- End Contact Section -->
-    </main>
-    <!-- End #main -->
-
-    <!-- ======= Footer ======= -->
-    <footer id="footer">
-      <div class="container">
-        <h3>Aimi Misman</h3>
-        <p>PSA: Stay hydrated bestie!</p>
-        <div class="social-links">
-          <a href="https://www.instagram.com/aimizaff/" class="instagram"
-            ><i class="bx bxl-instagram"></i
-          ></a>
-          <a
-            href="https://www.linkedin.com/in/aimi-misman-065b2a150/"
-            class="linkedin"
-            ><i class="bx bxl-linkedin"></i
-          ></a>
-        </div>
-        <div class="copyright">
-          &copy; Copyright <strong><span>Ver. 1.1.2</span></strong
-          >. All Rights Reserved
-        </div>
-        <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you purchased the pro version. -->
-          <!-- Licensing information: [license-url] -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/ -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
+        </details>
       </div>
-    </footer>
-    <!-- End Footer -->
+    </section>
 
-    <div id="preloader"></div>
-    <a
-      href="#"
-      class="back-to-top d-flex align-items-center justify-content-center"
-      ><i class="bi bi-arrow-up-short"></i
-    ></a>
 
-    <!-- Vendor JS Files -->
-    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/vendor/typed.js/typed.umd.js"></script>
-    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
+  </main>
 
-    <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
-  </body>
+  <footer>
+    <div class="container">
+      © <span id="year"></span> Aimi Misman. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+    const navAnchors = [...document.querySelectorAll(".nav-links a")];
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    menuBtn.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+
+    navAnchors.forEach(anchor => {
+      anchor.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuBtn.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navAnchors.forEach(anchor => {
+            anchor.classList.toggle(
+              "active",
+              anchor.getAttribute("href") === `#${entry.target.id}`
+            );
+          });
+        }
+      });
+    }, { rootMargin: "-35% 0px -55% 0px" });
+
+    document.querySelectorAll("main section[id], details[id]").forEach(section => {
+      sectionObserver.observe(section);
+    });
+  </script>
+</body>
+
 </html>
