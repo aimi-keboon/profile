@@ -2,919 +2,884 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aimi Misman | My Laboratory</title>
-    <meta name="description"
-        content="A pixel-themed laboratory page for Aimi Misman's ready-to-use projects, tools, experiments, and live app previews." />
-    <meta name="author" content="Aimi Misman" />
-    <meta name="robots" content="noindex, nofollow" />
-    <link rel="icon" type="image/png" href="aimi.png" />
-    <link rel="apple-touch-icon" href="aimi.png" />
-    <meta name="theme-color" content="#090b1a" />
-
-    <style>
-        :root {
-            --bg: #090b1a;
-            --bg-2: #11162d;
-            --surface: rgba(17, 22, 45, 0.94);
-            --surface-2: rgba(27, 35, 67, 0.94);
-            --panel: #161d38;
-            --text: #f8fbff;
-            --muted: #a9b4d0;
-            --line: rgba(92, 244, 255, 0.28);
-            --grid-line: rgba(92, 244, 255, 0.07);
-            --neon: #5cf4ff;
-            --neon-2: #ff4fd8;
-            --green: #7cff6b;
-            --yellow: #ffd166;
-            --orange: #ff9f43;
-            --danger: #ff6b8a;
-            --shadow: 8px 8px 0 #040511;
-            --shadow-soft: 0 0 28px rgba(92, 244, 255, 0.14);
-            --max: 1180px;
-            --pixel-border: 3px solid var(--neon);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            min-height: 100vh;
-            color: var(--text);
-            font-family: "Courier New", Courier, monospace;
-            line-height: 1.65;
-            background:
-                linear-gradient(var(--grid-line) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
-                radial-gradient(circle at 14% 6%, rgba(255, 79, 216, 0.25), transparent 28%),
-                radial-gradient(circle at 88% 0%, rgba(92, 244, 255, 0.22), transparent 32%),
-                linear-gradient(180deg, var(--bg), var(--bg-2));
-            background-size: 24px 24px, 24px 24px, auto, auto, auto;
-            image-rendering: pixelated;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            background: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 4px);
-            mix-blend-mode: screen;
-            opacity: 0.24;
-            z-index: 999;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        button,
-        input,
-        select {
-            font: inherit;
-        }
-
-        button {
-            cursor: pointer;
-        }
-
-        code {
-            color: var(--green);
-        }
-
-        .container {
-            width: min(var(--max), calc(100% - 28px));
-            margin: 0 auto;
-        }
-
-        .skip-link {
-            position: absolute;
-            left: -999px;
-            top: 8px;
-            background: var(--green);
-            color: #061006;
-            padding: 8px 12px;
-            z-index: 1000;
-            font-weight: 900;
-        }
-
-        .skip-link:focus {
-            left: 8px;
-        }
-
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(9, 11, 26, 0.9);
-            border-bottom: var(--pixel-border);
-            box-shadow: 0 0 22px rgba(92, 244, 255, 0.18);
-            backdrop-filter: blur(12px);
-        }
-
-        .nav-inner {
-            min-height: 72px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 18px;
-        }
-
-        .brand-wrap {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 900;
-            letter-spacing: -0.04em;
-            text-transform: uppercase;
-            color: var(--text);
-        }
-
-        .logo-mark {
-            width: 44px;
-            height: 44px;
-            display: grid;
-            place-items: center;
-            border: 3px solid var(--text);
-            background: linear-gradient(135deg, var(--neon), var(--neon-2));
-            box-shadow: 4px 4px 0 #000;
-            overflow: hidden;
-        }
-
-        .logo-mark img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            image-rendering: pixelated;
-            filter: contrast(1.15) saturate(1.15);
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .nav-link {
-            border: 2px solid rgba(255, 255, 255, 0.28);
-            background: #11162d;
-            color: var(--muted);
-            padding: 9px 12px;
-            box-shadow: 4px 4px 0 #000;
-            font-weight: 800;
-            transition: transform 120ms ease, color 120ms ease, border-color 120ms ease;
-        }
-
-        .nav-link:hover,
-        .nav-link:focus-visible {
-            transform: translate(-2px, -2px);
-            color: var(--neon);
-            border-color: var(--neon);
-        }
-
-        .hero {
-            padding: 58px 0 26px;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.15fr 0.85fr;
-            gap: 22px;
-            align-items: stretch;
-        }
-
-        .pixel-card {
-            border: var(--pixel-border);
-            background: var(--surface);
-            box-shadow: var(--shadow), var(--shadow-soft);
-            position: relative;
-        }
-
-        .pixel-card::before {
-            content: "";
-            position: absolute;
-            inset: 7px;
-            border: 1px dashed rgba(255, 255, 255, 0.14);
-            pointer-events: none;
-        }
-
-        .hero-copy,
-        .command-panel,
-        .section-panel {
-            padding: 26px;
-        }
-
-        .terminal-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 16px;
-            padding: 7px 11px;
-            background: #060713;
-            border: 2px solid rgba(124, 255, 107, 0.6);
-            color: var(--green);
-            font-weight: 900;
-            text-transform: uppercase;
-            font-size: 0.86rem;
-            box-shadow: 4px 4px 0 #000;
-        }
-
-        .terminal-dot {
-            width: 10px;
-            height: 10px;
-            background: var(--green);
-            box-shadow: 0 0 12px var(--green);
-            display: inline-block;
-        }
-
-        h1,
-        h2,
-        h3 {
-            line-height: 1.05;
-            letter-spacing: -0.07em;
-            text-transform: uppercase;
-        }
-
-        h1 {
-            font-size: clamp(2.3rem, 6vw, 5rem);
-            margin-bottom: 18px;
-            text-shadow: 4px 4px 0 #000, 0 0 18px rgba(92, 244, 255, 0.22);
-        }
-
-        h2 {
-            font-size: clamp(1.55rem, 3.5vw, 2.6rem);
-            margin-bottom: 10px;
-        }
-
-        h3 {
-            font-size: 1.12rem;
-        }
-
-        p,
-        li {
-            color: var(--muted);
-        }
-
-        .lead {
-            font-size: 1.02rem;
-            max-width: 760px;
-            margin-bottom: 22px;
-        }
-
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            min-height: 46px;
-            border: 3px solid var(--text);
-            padding: 10px 15px;
-            background: var(--panel);
-            color: var(--text);
-            font-weight: 900;
-            box-shadow: 5px 5px 0 #000;
-            text-transform: uppercase;
-            transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
-        }
-
-        .btn:hover,
-        .btn:focus-visible {
-            transform: translate(-2px, -2px);
-            box-shadow: 7px 7px 0 #000;
-            background: #1c2547;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--neon-2), #7a5cff);
-        }
-
-        .btn-green {
-            background: linear-gradient(135deg, #1e8f4d, var(--green));
-            color: #061006;
-        }
-
-        .btn-small {
-            min-height: 38px;
-            padding: 8px 11px;
-            border-width: 2px;
-            font-size: 0.85rem;
-            box-shadow: 4px 4px 0 #000;
-        }
-
-        .command-panel {
-            display: grid;
-            gap: 14px;
-            background:
-                linear-gradient(135deg, rgba(92, 244, 255, 0.08), rgba(255, 79, 216, 0.08)),
-                var(--surface);
-        }
-
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 12px;
-        }
-
-        .stat-box {
-            border: 2px solid rgba(255, 255, 255, 0.22);
-            background: rgba(0, 0, 0, 0.28);
-            padding: 15px;
-            box-shadow: 4px 4px 0 #000;
-        }
-
-        .stat-box strong {
-            display: block;
-            color: var(--neon);
-            font-size: 1.4rem;
-            line-height: 1;
-            margin-bottom: 6px;
-        }
-
-        .stat-box span {
-            color: var(--muted);
-            font-size: 0.86rem;
-        }
-
-        .terminal-window {
-            background: #050611;
-            border: 3px solid rgba(255, 255, 255, 0.24);
-            box-shadow: 5px 5px 0 #000;
-            overflow: hidden;
-        }
-
-        .terminal-bar {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.18);
-            padding: 8px 10px;
-            background: #12162c;
-        }
-
-        .lamp {
-            width: 10px;
-            height: 10px;
-            display: inline-block;
-            background: var(--danger);
-        }
-
-        .lamp:nth-child(2) {
-            background: var(--yellow);
-        }
-
-        .lamp:nth-child(3) {
-            background: var(--green);
-        }
-
-        .terminal-body {
-            padding: 15px;
-        }
-
-        .line {
-            display: block;
-            color: var(--green);
-            margin: 3px 0;
-        }
-
-        .line span {
-            color: var(--neon);
-        }
-
-        .section {
-            padding: 34px 0 64px;
-        }
-
-        .toolbar {
-            display: grid;
-            grid-template-columns: minmax(220px, 1fr) 210px 190px;
-            gap: 12px;
-            margin: 22px 0;
-        }
-
-        .field,
-        .select {
-            width: 100%;
-            min-height: 48px;
-            border: 3px solid rgba(255, 255, 255, 0.28);
-            background: #080a18;
-            color: var(--text);
-            padding: 10px 12px;
-            box-shadow: 4px 4px 0 #000;
-            outline: none;
-        }
-
-        .field:focus,
-        .select:focus {
-            border-color: var(--green);
-            box-shadow: 4px 4px 0 #000, 0 0 18px rgba(124, 255, 107, 0.18);
-        }
-
-        .lab-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-            gap: 20px;
-        }
-
-        .lab-card {
-            border: 3px solid rgba(92, 244, 255, 0.75);
-            background: var(--surface-2);
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-            min-height: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .lab-card::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, var(--neon), var(--neon-2), var(--green));
-        }
-
-        .lab-content {
-            padding: 20px;
-            display: grid;
-            gap: 14px;
-            flex: 1;
-        }
-
-        .card-top {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 14px;
-        }
-
-        .project-kicker {
-            color: var(--green);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            font-weight: 900;
-            font-size: 0.78rem;
-            margin-bottom: 8px;
-        }
-
-        .project-url {
-            color: var(--neon);
-            font-size: 0.85rem;
-            word-break: break-all;
-        }
-
-        .badge {
-            flex: 0 0 auto;
-            border: 2px solid var(--yellow);
-            color: var(--yellow);
-            background: #090b1a;
-            padding: 6px 8px;
-            font-size: 0.74rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            box-shadow: 3px 3px 0 #000;
-        }
-
-        .description {
-            min-height: 90px;
-        }
-
-        .tag-list {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            border: 2px solid rgba(92, 244, 255, 0.32);
-            background: rgba(0, 0, 0, 0.2);
-            color: var(--muted);
-            padding: 6px 8px;
-            font-size: 0.82rem;
-            font-weight: 800;
-        }
-
-        .feature-list {
-            display: grid;
-            gap: 6px;
-            padding-left: 0;
-        }
-
-        .feature-list li {
-            list-style: none;
-            position: relative;
-            padding-left: 18px;
-            font-size: 0.9rem;
-        }
-
-        .feature-list li::before {
-            content: ">";
-            position: absolute;
-            left: 0;
-            color: var(--green);
-            font-weight: 900;
-        }
-
-        .card-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: auto;
-        }
-
-        .preview-box {
-            border-top: 3px solid rgba(92, 244, 255, 0.35);
-            background: #070916;
-        }
-
-        .preview-box summary {
-            list-style: none;
-            cursor: pointer;
-            padding: 13px 16px;
-            color: var(--neon);
-            font-weight: 900;
-            text-transform: uppercase;
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-        }
-
-        .preview-box summary::-webkit-details-marker {
-            display: none;
-        }
-
-        .preview-box summary::after {
-            content: "+";
-            color: var(--green);
-        }
-
-        .preview-box[open] summary::after {
-            content: "-";
-        }
-
-        .frame-shell {
-            height: 430px;
-            border-top: 2px solid rgba(255, 255, 255, 0.16);
-            background: #ffffff;
-        }
-
-        .frame-shell iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-            display: block;
-            background: #ffffff;
-        }
-
-        .empty-state {
-            display: none;
-            margin-top: 20px;
-            padding: 22px;
-            border: 3px dashed rgba(255, 255, 255, 0.25);
-            background: rgba(0, 0, 0, 0.22);
-            color: var(--muted);
-            text-align: center;
-        }
-
-        .empty-state.show {
-            display: block;
-        }
-
-        .notes-panel {
-            margin-top: 24px;
-            padding: 20px;
-            border: 3px solid rgba(124, 255, 107, 0.45);
-            background: rgba(7, 9, 22, 0.82);
-            box-shadow: 6px 6px 0 #000;
-        }
-
-        .notes-panel h3 {
-            color: var(--green);
-            margin-bottom: 10px;
-        }
-
-        footer {
-            padding: 26px 0 42px;
-            text-align: center;
-            color: var(--muted);
-            border-top: 2px solid rgba(92, 244, 255, 0.18);
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(12px);
-            transition: opacity 420ms ease, transform 420ms ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media (max-width: 930px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .toolbar {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .nav-inner {
-                align-items: flex-start;
-                flex-direction: column;
-                padding: 14px 0;
-            }
-
-            .nav-actions {
-                width: 100%;
-            }
-
-            .nav-link {
-                flex: 1;
-                text-align: center;
-            }
-
-            .hero {
-                padding-top: 34px;
-            }
-
-            .hero-copy,
-            .command-panel,
-            .section-panel {
-                padding: 20px;
-            }
-
-            .stat-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .btn {
-                width: 100%;
-            }
-
-            .card-actions {
-                flex-direction: column;
-            }
-
-            .frame-shell {
-                height: 360px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aimi Misman | My Laboratory</title>
+  <meta name="description" content="A pixel-themed laboratory page for Aimi Misman's ready-to-use projects, tools, experiments, and live app previews." />
+  <meta name="author" content="Aimi Misman" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="aimi.png" />
+  <link rel="apple-touch-icon" href="aimi.png" />
+  <meta name="theme-color" content="#090b1a" />
+
+  <style>
+    :root {
+      --bg: #090b1a;
+      --bg-2: #11162d;
+      --surface: rgba(17, 22, 45, 0.94);
+      --surface-2: rgba(27, 35, 67, 0.94);
+      --panel: #161d38;
+      --text: #f8fbff;
+      --muted: #a9b4d0;
+      --line: rgba(92, 244, 255, 0.28);
+      --grid-line: rgba(92, 244, 255, 0.07);
+      --neon: #5cf4ff;
+      --neon-2: #ff4fd8;
+      --green: #7cff6b;
+      --yellow: #ffd166;
+      --orange: #ff9f43;
+      --danger: #ff6b8a;
+      --shadow: 8px 8px 0 #040511;
+      --shadow-soft: 0 0 28px rgba(92, 244, 255, 0.14);
+      --max: 1180px;
+      --pixel-border: 3px solid var(--neon);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "Courier New", Courier, monospace;
+      line-height: 1.65;
+      background:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+        radial-gradient(circle at 14% 6%, rgba(255, 79, 216, 0.25), transparent 28%),
+        radial-gradient(circle at 88% 0%, rgba(92, 244, 255, 0.22), transparent 32%),
+        linear-gradient(180deg, var(--bg), var(--bg-2));
+      background-size: 24px 24px, 24px 24px, auto, auto, auto;
+      image-rendering: pixelated;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(180deg, rgba(255,255,255,0.03) 0, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 4px);
+      mix-blend-mode: screen;
+      opacity: 0.24;
+      z-index: 999;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    code { color: var(--green); }
+
+    .container { width: min(var(--max), calc(100% - 28px)); margin: 0 auto; }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 8px;
+      background: var(--green);
+      color: #061006;
+      padding: 8px 12px;
+      z-index: 1000;
+      font-weight: 900;
+    }
+    .skip-link:focus { left: 8px; }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 11, 26, 0.9);
+      border-bottom: var(--pixel-border);
+      box-shadow: 0 0 22px rgba(92, 244, 255, 0.18);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .logo-mark {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 3px solid var(--text);
+      background: linear-gradient(135deg, var(--neon), var(--neon-2));
+      box-shadow: 4px 4px 0 #000;
+      overflow: hidden;
+    }
+
+    .logo-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      image-rendering: pixelated;
+      filter: contrast(1.15) saturate(1.15);
+    }
+
+    .nav-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+    .nav-link {
+      border: 2px solid rgba(255, 255, 255, 0.28);
+      background: #11162d;
+      color: var(--muted);
+      padding: 9px 12px;
+      box-shadow: 4px 4px 0 #000;
+      font-weight: 800;
+      transition: transform 120ms ease, color 120ms ease, border-color 120ms ease;
+    }
+
+    .nav-link:hover, .nav-link:focus-visible {
+      transform: translate(-2px, -2px);
+      color: var(--neon);
+      border-color: var(--neon);
+    }
+
+    .hero { padding: 58px 0 26px; }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .pixel-card {
+      border: var(--pixel-border);
+      background: var(--surface);
+      box-shadow: var(--shadow), var(--shadow-soft);
+      position: relative;
+    }
+
+    .pixel-card::before {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      border: 1px dashed rgba(255, 255, 255, 0.14);
+      pointer-events: none;
+    }
+
+    .hero-copy, .command-panel, .section-panel { padding: 26px; }
+
+    .terminal-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 7px 11px;
+      background: #060713;
+      border: 2px solid rgba(124, 255, 107, 0.6);
+      color: var(--green);
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 0.86rem;
+      box-shadow: 4px 4px 0 #000;
+    }
+
+    .terminal-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--green);
+      box-shadow: 0 0 12px var(--green);
+      display: inline-block;
+    }
+
+    h1, h2, h3 { line-height: 1.05; letter-spacing: -0.07em; text-transform: uppercase; }
+    h1 { font-size: clamp(2.3rem, 6vw, 5rem); margin-bottom: 18px; text-shadow: 4px 4px 0 #000, 0 0 18px rgba(92, 244, 255, 0.22); }
+    h2 { font-size: clamp(1.55rem, 3.5vw, 2.6rem); margin-bottom: 10px; }
+    h3 { font-size: 1.12rem; }
+    p, li { color: var(--muted); }
+    .lead { font-size: 1.02rem; max-width: 760px; margin-bottom: 22px; }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      border: 3px solid var(--text);
+      padding: 10px 15px;
+      background: var(--panel);
+      color: var(--text);
+      font-weight: 900;
+      box-shadow: 5px 5px 0 #000;
+      text-transform: uppercase;
+      transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+    }
+
+    .btn:hover, .btn:focus-visible {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 #000;
+      background: #1c2547;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--neon-2), #7a5cff);
+    }
+
+    .btn-green {
+      background: linear-gradient(135deg, #1e8f4d, var(--green));
+      color: #061006;
+    }
+
+    .btn-small {
+      min-height: 38px;
+      padding: 8px 11px;
+      border-width: 2px;
+      font-size: 0.85rem;
+      box-shadow: 4px 4px 0 #000;
+    }
+
+    .command-panel {
+      display: grid;
+      gap: 14px;
+      background:
+        linear-gradient(135deg, rgba(92, 244, 255, 0.08), rgba(255, 79, 216, 0.08)),
+        var(--surface);
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .stat-box {
+      border: 2px solid rgba(255,255,255,0.22);
+      background: rgba(0,0,0,0.28);
+      padding: 15px;
+      box-shadow: 4px 4px 0 #000;
+    }
+
+    .stat-box strong {
+      display: block;
+      color: var(--neon);
+      font-size: 1.4rem;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-box span { color: var(--muted); font-size: 0.86rem; }
+
+    .terminal-window {
+      background: #050611;
+      border: 3px solid rgba(255,255,255,0.24);
+      box-shadow: 5px 5px 0 #000;
+      overflow: hidden;
+    }
+
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      border-bottom: 2px solid rgba(255,255,255,0.18);
+      padding: 8px 10px;
+      background: #12162c;
+    }
+
+    .lamp { width: 10px; height: 10px; display: inline-block; background: var(--danger); }
+    .lamp:nth-child(2) { background: var(--yellow); }
+    .lamp:nth-child(3) { background: var(--green); }
+
+    .terminal-body { padding: 15px; }
+    .line { display: block; color: var(--green); margin: 3px 0; }
+    .line span { color: var(--neon); }
+
+    .section { padding: 34px 0 64px; }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) 210px 190px;
+      gap: 12px;
+      margin: 22px 0;
+    }
+
+    .field, .select {
+      width: 100%;
+      min-height: 48px;
+      border: 3px solid rgba(255,255,255,0.28);
+      background: #080a18;
+      color: var(--text);
+      padding: 10px 12px;
+      box-shadow: 4px 4px 0 #000;
+      outline: none;
+    }
+
+    .field:focus, .select:focus {
+      border-color: var(--green);
+      box-shadow: 4px 4px 0 #000, 0 0 18px rgba(124,255,107,0.18);
+    }
+
+    .lab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+      gap: 20px;
+    }
+
+    .lab-card {
+      border: 3px solid rgba(92, 244, 255, 0.75);
+      background: var(--surface-2);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lab-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--neon), var(--neon-2), var(--green));
+    }
+
+    .lab-content { padding: 20px; display: grid; gap: 14px; flex: 1; }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .project-kicker {
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 900;
+      font-size: 0.78rem;
+      margin-bottom: 8px;
+    }
+
+    .project-url {
+      color: var(--neon);
+      font-size: 0.85rem;
+      word-break: break-all;
+    }
+
+    .badge {
+      flex: 0 0 auto;
+      border: 2px solid var(--yellow);
+      color: var(--yellow);
+      background: #090b1a;
+      padding: 6px 8px;
+      font-size: 0.74rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      box-shadow: 3px 3px 0 #000;
+    }
+
+    .description { min-height: 90px; }
+
+    .tag-list { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .tag {
+      border: 2px solid rgba(92, 244, 255, 0.32);
+      background: rgba(0,0,0,0.2);
+      color: var(--muted);
+      padding: 6px 8px;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 6px;
+      padding-left: 0;
+    }
+
+    .feature-list li {
+      list-style: none;
+      position: relative;
+      padding-left: 18px;
+      font-size: 0.9rem;
+    }
+
+    .feature-list li::before {
+      content: ">";
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .card-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; }
+
+    .preview-box {
+      border-top: 3px solid rgba(92, 244, 255, 0.35);
+      background: #070916;
+    }
+
+    .preview-box summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 13px 16px;
+      color: var(--neon);
+      font-weight: 900;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .preview-box summary::-webkit-details-marker { display: none; }
+    .preview-box summary::after { content: "+"; color: var(--green); }
+    .preview-box[open] summary::after { content: "-"; }
+
+    .frame-shell {
+      height: 430px;
+      border-top: 2px solid rgba(255,255,255,0.16);
+      background: #ffffff;
+    }
+
+    .frame-shell iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      background: #ffffff;
+    }
+
+    .empty-state {
+      display: none;
+      margin-top: 20px;
+      padding: 22px;
+      border: 3px dashed rgba(255, 255, 255, 0.25);
+      background: rgba(0,0,0,0.22);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .empty-state.show { display: block; }
+
+    .notes-panel {
+      margin-top: 24px;
+      padding: 20px;
+      border: 3px solid rgba(124,255,107,0.45);
+      background: rgba(7, 9, 22, 0.82);
+      box-shadow: 6px 6px 0 #000;
+    }
+
+    .notes-panel h3 { color: var(--green); margin-bottom: 10px; }
+
+    footer {
+      padding: 26px 0 42px;
+      text-align: center;
+      color: var(--muted);
+      border-top: 2px solid rgba(92, 244, 255, 0.18);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 420ms ease, transform 420ms ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 930px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .toolbar { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-inner { align-items: flex-start; flex-direction: column; padding: 14px 0; }
+      .nav-actions { width: 100%; }
+      .nav-link { flex: 1; text-align: center; }
+      .hero { padding-top: 34px; }
+      .hero-copy, .command-panel, .section-panel { padding: 20px; }
+      .stat-grid { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .card-actions { flex-direction: column; }
+      .frame-shell { height: 360px; }
+    }
+
+    /* Shared portfolio navigation header */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 11, 26, 0.9);
+      border-bottom: 2px solid var(--neon);
+      box-shadow: 0 6px 0 rgba(0,0,0,0.6);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-direction: row;
+      padding: 0;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .brand-wrap span:last-child::after {
+      content: "_DEV";
+      color: var(--neon);
+      margin-left: 6px;
+    }
+
+    .logo-mark {
+      flex: 0 0 auto;
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--neon);
+      background: linear-gradient(135deg, #7c5cff, var(--neon-2));
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.8);
+      overflow: hidden;
+      image-rendering: pixelated;
+    }
+
+    .logo-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      image-rendering: pixelated;
+      filter: contrast(1.15) saturate(1.15);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.86rem;
+      padding: 9px 12px;
+      border: 2px solid transparent;
+      font-weight: 800;
+      text-transform: uppercase;
+      transition: color 140ms ease, background 140ms ease, border-color 140ms ease, transform 140ms steps(2);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #06111d;
+      background: var(--neon);
+      border-color: var(--text);
+      transform: translate(-2px, -2px);
+      box-shadow: 3px 3px 0 rgba(0,0,0,0.8);
+    }
+
+    .menu-btn {
+      display: none;
+      border: 2px solid var(--neon);
+      background: #0c1024;
+      color: var(--neon);
+      padding: 10px 12px;
+      cursor: pointer;
+      font-weight: 900;
+      text-transform: uppercase;
+      box-shadow: 3px 3px 0 rgba(0,0,0,0.8);
+    }
+
+    @media (max-width: 860px) {
+      .menu-btn { display: inline-flex; }
+
+      .nav-links {
+        position: absolute;
+        top: 76px;
+        left: 14px;
+        right: 14px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        background: rgba(9, 11, 26, 0.98);
+        border: 2px solid var(--neon);
+        padding: 10px;
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open { display: flex; }
+    }
+
+    @media (max-width: 680px) {
+      .nav-inner {
+        min-height: 76px;
+        flex-direction: row;
+        align-items: center;
+        padding: 0;
+      }
+    }
+
+  </style>
 </head>
 
 <body>
-    <a class="skip-link" href="#projects">Skip to projects</a>
+  <a class="skip-link" href="#projects">Skip to projects</a>
 
-    <header class="navbar">
-        <div class="container nav-inner">
-            <a href="#top" class="brand-wrap" aria-label="Aimi Misman My Laboratory home">
-                <span class="logo-mark" aria-hidden="true">
-                    <img src="aimi.png" alt=""
-                        onerror="this.style.display='none'; this.parentElement.textContent='AM';" />
-                </span>
-                <span>My Laboratory</span>
-            </a>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-wrap" aria-label="Aimi Misman home">
+        <span class="logo-mark" aria-hidden="true">
+          <img src="aimi.png" alt="" onerror="this.style.display='none'" />
+        </span>
+        <span>Aimi Misman</span>
+      </a>
 
-            <div class="nav-actions">
-                <a class="nav-link" href="index.html">My Profile</a>
-                <a class="nav-link" href="fav.html">My Library</a>
-                <a class="nav-link" href="lab.html">My Laboratory</a>
-            </div>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="index.html">My Profile</a>
+        <a href="fav.html">My Library</a>
+        <a href="lab.html">My Laboratory</a>
+      </nav>
+
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-label="Open navigation">MENU.EXE</button>
+    </div>
+  </header>
+
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="pixel-card hero-copy reveal">
+          <div class="terminal-label"><span class="terminal-dot"></span> Ready-To-Use Builds</div>
+          <h1>My Laboratory</h1>
+          <p class="lead">
+            A collection of tools, experiments, and apps I built that are ready to launch. Each project has a short
+            mission brief, feature notes, and a collapsible live preview so the page stays clean.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">Browse Projects</a>
+            <a class="btn btn-green" href="https://github.com/aimi-keboon" target="_blank" rel="noopener">GitHub Lab</a>
+          </div>
         </div>
-        </nav>
-        </div>
-    </header>
 
-    <main id="top">
-        <section class="hero">
-            <div class="container hero-grid">
-                <div class="pixel-card hero-copy reveal">
-                    <div class="terminal-label"><span class="terminal-dot"></span> Ready-To-Use Builds</div>
-                    <h1>My Laboratory</h1>
-                    <p class="lead">
-                        A collection of tools, experiments, and apps I built that are ready to launch. Each project has
-                        a short
-                        mission brief, feature notes, and a collapsible live preview so the page stays clean.
-                    </p>
-                    <div class="hero-actions">
-                        <a class="btn btn-primary" href="#projects">Browse Projects</a>
-                        <a class="btn btn-green" href="https://github.com/aimi-keboon" target="_blank"
-                            rel="noopener">GitHub Lab</a>
-                    </div>
-                </div>
-
-                <aside class="pixel-card command-panel reveal" aria-label="Laboratory stats">
-                    <div class="terminal-window">
-                        <div class="terminal-bar"><span class="lamp"></span><span class="lamp"></span><span
-                                class="lamp"></span></div>
-                        <div class="terminal-body">
-                            <span class="line">&gt; booting <span>my_laboratory.exe</span></span>
-                            <span class="line">&gt; status: <span>projects online</span></span>
-                            <span class="line">&gt; mode: <span>public launch vault</span></span>
-                            <span class="line">&gt; previews: <span>collapsible iframes</span></span>
-                        </div>
-                    </div>
-
-                    <div class="stat-grid">
-                        <div class="stat-box"><strong id="totalCount">0</strong><span>Total builds</span></div>
-                        <div class="stat-box"><strong id="shownCount">0</strong><span>Visible now</span></div>
-                        <div class="stat-box"><strong>3</strong><span>Project categories</span></div>
-                        <div class="stat-box"><strong>LIVE</strong><span>Launch status</span></div>
-                    </div>
-                </aside>
+        <aside class="pixel-card command-panel reveal" aria-label="Laboratory stats">
+          <div class="terminal-window">
+            <div class="terminal-bar"><span class="lamp"></span><span class="lamp"></span><span class="lamp"></span></div>
+            <div class="terminal-body">
+              <span class="line">&gt; booting <span>my_laboratory.exe</span></span>
+              <span class="line">&gt; status: <span>projects online</span></span>
+              <span class="line">&gt; mode: <span>public launch vault</span></span>
+              <span class="line">&gt; previews: <span>collapsible iframes</span></span>
             </div>
-        </section>
+          </div>
 
-        <section class="section" id="projects">
-            <div class="container">
-                <div class="pixel-card section-panel reveal">
-                    <div class="terminal-label"><span class="terminal-dot"></span> Lab Index</div>
-                    <h2>Project Collection</h2>
-                    <p>
-                        Search by project name, category, features, or description. Use the category filter to focus the
-                        lab shelf.
-                    </p>
+          <div class="stat-grid">
+            <div class="stat-box"><strong id="totalCount">0</strong><span>Total builds</span></div>
+            <div class="stat-box"><strong id="shownCount">0</strong><span>Visible now</span></div>
+            <div class="stat-box"><strong>3</strong><span>Project categories</span></div>
+            <div class="stat-box"><strong>LIVE</strong><span>Launch status</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
 
-                    <div class="toolbar" aria-label="Project controls">
-                        <input class="field" id="searchInput" type="search"
-                            placeholder="Search projects, features, tags..." aria-label="Search projects" />
-                        <select class="select" id="categoryFilter" aria-label="Filter by category">
-                            <option value="all">All Categories</option>
-                        </select>
-                        <select class="select" id="sortSelect" aria-label="Sort projects">
-                            <option value="featured">Featured First</option>
-                            <option value="name-asc">Name A-Z</option>
-                            <option value="name-desc">Name Z-A</option>
-                            <option value="newest">Newest First</option>
-                        </select>
-                    </div>
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="pixel-card section-panel reveal">
+          <div class="terminal-label"><span class="terminal-dot"></span> Lab Index</div>
+          <h2>Project Collection</h2>
+          <p>
+            Search by project name, category, features, or description. Use the category filter to focus the lab shelf.
+          </p>
 
-                    <div class="lab-grid" id="projectGrid"></div>
-                    <div class="empty-state" id="emptyState">No matching project found. Try a different keyword or
-                        category.</div>
+          <div class="toolbar" aria-label="Project controls">
+            <input class="field" id="searchInput" type="search" placeholder="Search projects, features, tags..." aria-label="Search projects" />
+            <select class="select" id="categoryFilter" aria-label="Filter by category">
+              <option value="all">All Categories</option>
+            </select>
+            <select class="select" id="sortSelect" aria-label="Sort projects">
+              <option value="featured">Featured First</option>
+              <option value="name-asc">Name A-Z</option>
+              <option value="name-desc">Name Z-A</option>
+              <option value="newest">Newest First</option>
+            </select>
+          </div>
 
-                    <div class="notes-panel" id="notes">
-                        <h3>How to add more projects</h3>
-                        <p>
-                            This page is hardcoded on purpose. To add a project, duplicate one object in the
-                            <code>projects</code>
-                            array inside the script, then update the name, URL, category, tags, features, and
-                            description.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+          <div class="lab-grid" id="projectGrid"></div>
+          <div class="empty-state" id="emptyState">No matching project found. Try a different keyword or category.</div>
 
-    <footer>
-        <div class="container">
-            © <span id="year"></span> Aimi Misman · My Laboratory
+          
         </div>
-    </footer>
+      </div>
+    </section>
+  </main>
 
-    <script>
-        const projects = [
-            {
-                id: "calendar-analysis",
-                name: "Calendar Analysis",
-                url: "https://aimi-keboon.github.io/calendar-analysis/",
-                category: "Productivity Analytics",
-                status: "Live Tool",
-                featured: true,
-                createdAt: "2026-04-25T00:00:00.000Z",
-                tags: ["calendar", "ics", "habit tracker", "analytics", "time audit"],
-                description: "A calendar-based activity analysis tool where users upload an .ics calendar file and get insights into how they spend their time. It works like a habit tracker, but the analysis is based only on the calendar input provided by the user.",
-                features: [
-                    "ICS calendar file upload",
-                    "Activity and time-spend analysis",
-                    "Habit-tracker style breakdowns",
-                    "Useful for personal productivity reviews"
-                ]
-            },
-            {
-                id: "brd-checker",
-                name: "BRD Checker",
-                url: "https://aimi-keboon.github.io/brd-checker/",
-                category: "Business Analysis",
-                status: "AI Guide",
-                featured: true,
-                createdAt: "2026-04-25T00:00:01.000Z",
-                tags: ["brd", "requirements", "business analyst", "ai", "documentation"],
-                description: "A support tool for business analysts to feed stakeholder requirements into a chatbot and receive guidance for building a more complete Business Requirements Document.",
-                features: [
-                    "Stakeholder requirement input",
-                    "AI-guided BRD improvement",
-                    "Documentation structure support",
-                    "Made for business analyst workflows"
-                ]
-            },
-            {
-                id: "taskms",
-                name: "TaskMS",
-                url: "https://aimi-keboon.github.io/taskms/",
-                category: "Workforce Management",
-                status: "Ops Dashboard",
-                featured: true,
-                createdAt: "2026-04-25T00:00:02.000Z",
-                tags: ["task management", "onsite workers", "geolocation", "time log", "dashboard"],
-                description: "A monitoring tool for onsite workers with geolocation pins, time logs, image uploads, task management, and an analysis dashboard for managers to track onsite work progress.",
-                features: [
-                    "Geolocation pin support",
-                    "Worker time logging",
-                    "Image upload proof-of-work flow",
-                    "Manager analysis dashboard"
-                ]
-            }
-        ];
+  <footer>
+    <div class="container">
+      © <span id="year"></span> Aimi Misman · My Laboratory
+    </div>
+  </footer>
 
-        const projectGrid = document.getElementById("projectGrid");
-        const searchInput = document.getElementById("searchInput");
-        const categoryFilter = document.getElementById("categoryFilter");
-        const sortSelect = document.getElementById("sortSelect");
-        const emptyState = document.getElementById("emptyState");
-        const totalCount = document.getElementById("totalCount");
-        const shownCount = document.getElementById("shownCount");
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+    const navAnchors = [...document.querySelectorAll(".nav-links a")];
 
-        document.getElementById("year").textContent = new Date().getFullYear();
-        totalCount.textContent = projects.length;
+    if (menuBtn && navLinks) {
+      menuBtn.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        menuBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
 
-        const escapeHTML = (value) => String(value)
-            .replaceAll("&", "&amp;")
-            .replaceAll("<", "&lt;")
-            .replaceAll(">", "&gt;")
-            .replaceAll('"', "&quot;")
-            .replaceAll("'", "&#039;");
+      navAnchors.forEach(anchor => {
+        const targetFile = anchor.getAttribute("href").split("#")[0];
+        const currentFile = window.location.pathname.split("/").pop() || "index.html";
+        if (targetFile === currentFile) anchor.classList.add("active");
 
-        function projectSearchBlob(project) {
-            return [
-                project.name,
-                project.url,
-                project.category,
-                project.status,
-                project.description,
-                ...project.tags,
-                ...project.features
-            ].join(" ").toLowerCase();
-        }
+        anchor.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          menuBtn.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
 
-        function setupCategories() {
-            const categories = [...new Set(projects.map(project => project.category))].sort();
-            categories.forEach(category => {
-                const option = document.createElement("option");
-                option.value = category;
-                option.textContent = category;
-                categoryFilter.appendChild(option);
-            });
-        }
 
-        function sortProjects(items) {
-            const mode = sortSelect.value;
-            return [...items].sort((a, b) => {
-                if (mode === "name-asc") return a.name.localeCompare(b.name);
-                if (mode === "name-desc") return b.name.localeCompare(a.name);
-                if (mode === "newest") return new Date(b.createdAt) - new Date(a.createdAt);
-                return Number(b.featured) - Number(a.featured) || a.name.localeCompare(b.name);
-            });
-        }
+    const projects = [
+      {
+        id: "calendar-analysis",
+        name: "Calendar Analysis",
+        url: "https://aimi-keboon.github.io/calendar-analysis/",
+        category: "Productivity Analytics",
+        status: "Live Tool",
+        featured: true,
+        createdAt: "2026-04-25T00:00:00.000Z",
+        tags: ["calendar", "ics", "habit tracker", "analytics", "time audit"],
+        description: "A calendar-based activity analysis tool where users upload an .ics calendar file and get insights into how they spend their time. It works like a habit tracker, but the analysis is based only on the calendar input provided by the user.",
+        features: [
+          "ICS calendar file upload",
+          "Activity and time-spend analysis",
+          "Habit-tracker style breakdowns",
+          "Useful for personal productivity reviews"
+        ]
+      },
+      {
+        id: "brd-checker",
+        name: "BRD Checker",
+        url: "https://aimi-keboon.github.io/brd-checker/",
+        category: "Business Analysis",
+        status: "AI Guide",
+        featured: true,
+        createdAt: "2026-04-25T00:00:01.000Z",
+        tags: ["brd", "requirements", "business analyst", "ai", "documentation"],
+        description: "A support tool for business analysts to feed stakeholder requirements into a chatbot and receive guidance for building a more complete Business Requirements Document.",
+        features: [
+          "Stakeholder requirement input",
+          "AI-guided BRD improvement",
+          "Documentation structure support",
+          "Made for business analyst workflows"
+        ]
+      },
+      {
+        id: "taskms",
+        name: "TaskMS",
+        url: "https://aimi-keboon.github.io/taskms/",
+        category: "Workforce Management",
+        status: "Ops Dashboard",
+        featured: true,
+        createdAt: "2026-04-25T00:00:02.000Z",
+        tags: ["task management", "onsite workers", "geolocation", "time log", "dashboard"],
+        description: "A monitoring tool for onsite workers with geolocation pins, time logs, image uploads, task management, and an analysis dashboard for managers to track onsite work progress.",
+        features: [
+          "Geolocation pin support",
+          "Worker time logging",
+          "Image upload proof-of-work flow",
+          "Manager analysis dashboard"
+        ]
+      }
+    ];
 
-        function renderProjects() {
-            const query = searchInput.value.trim().toLowerCase();
-            const selectedCategory = categoryFilter.value;
+    const projectGrid = document.getElementById("projectGrid");
+    const searchInput = document.getElementById("searchInput");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const sortSelect = document.getElementById("sortSelect");
+    const emptyState = document.getElementById("emptyState");
+    const totalCount = document.getElementById("totalCount");
+    const shownCount = document.getElementById("shownCount");
 
-            const filtered = projects.filter(project => {
-                const matchesCategory = selectedCategory === "all" || project.category === selectedCategory;
-                const matchesSearch = !query || projectSearchBlob(project).includes(query);
-                return matchesCategory && matchesSearch;
-            });
+    document.getElementById("year").textContent = new Date().getFullYear();
+    totalCount.textContent = projects.length;
 
-            const sorted = sortProjects(filtered);
-            shownCount.textContent = sorted.length;
-            emptyState.classList.toggle("show", sorted.length === 0);
+    const escapeHTML = (value) => String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
 
-            projectGrid.innerHTML = sorted.map(project => `
+    function projectSearchBlob(project) {
+      return [
+        project.name,
+        project.url,
+        project.category,
+        project.status,
+        project.description,
+        ...project.tags,
+        ...project.features
+      ].join(" ").toLowerCase();
+    }
+
+    function setupCategories() {
+      const categories = [...new Set(projects.map(project => project.category))].sort();
+      categories.forEach(category => {
+        const option = document.createElement("option");
+        option.value = category;
+        option.textContent = category;
+        categoryFilter.appendChild(option);
+      });
+    }
+
+    function sortProjects(items) {
+      const mode = sortSelect.value;
+      return [...items].sort((a, b) => {
+        if (mode === "name-asc") return a.name.localeCompare(b.name);
+        if (mode === "name-desc") return b.name.localeCompare(a.name);
+        if (mode === "newest") return new Date(b.createdAt) - new Date(a.createdAt);
+        return Number(b.featured) - Number(a.featured) || a.name.localeCompare(b.name);
+      });
+    }
+
+    function renderProjects() {
+      const query = searchInput.value.trim().toLowerCase();
+      const selectedCategory = categoryFilter.value;
+
+      const filtered = projects.filter(project => {
+        const matchesCategory = selectedCategory === "all" || project.category === selectedCategory;
+        const matchesSearch = !query || projectSearchBlob(project).includes(query);
+        return matchesCategory && matchesSearch;
+      });
+
+      const sorted = sortProjects(filtered);
+      shownCount.textContent = sorted.length;
+      emptyState.classList.toggle("show", sorted.length === 0);
+
+      projectGrid.innerHTML = sorted.map(project => `
         <article class="lab-card reveal visible" data-category="${escapeHTML(project.category)}">
           <div class="lab-content">
             <div class="card-top">
@@ -950,44 +915,44 @@
           </details>
         </article>
       `).join("");
+    }
+
+    document.addEventListener("click", async (event) => {
+      const copyButton = event.target.closest("[data-copy]");
+      if (!copyButton) return;
+
+      const originalText = copyButton.textContent;
+      try {
+        await navigator.clipboard.writeText(copyButton.dataset.copy);
+        copyButton.textContent = "Copied!";
+      } catch (error) {
+        copyButton.textContent = "Copy Failed";
+      }
+
+      setTimeout(() => {
+        copyButton.textContent = originalText;
+      }, 1200);
+    });
+
+    [searchInput, categoryFilter, sortSelect].forEach(control => {
+      control.addEventListener("input", renderProjects);
+      control.addEventListener("change", renderProjects);
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
         }
+      });
+    }, { threshold: 0.12 });
 
-        document.addEventListener("click", async (event) => {
-            const copyButton = event.target.closest("[data-copy]");
-            if (!copyButton) return;
+    document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
 
-            const originalText = copyButton.textContent;
-            try {
-                await navigator.clipboard.writeText(copyButton.dataset.copy);
-                copyButton.textContent = "Copied!";
-            } catch (error) {
-                copyButton.textContent = "Copy Failed";
-            }
-
-            setTimeout(() => {
-                copyButton.textContent = originalText;
-            }, 1200);
-        });
-
-        [searchInput, categoryFilter, sortSelect].forEach(control => {
-            control.addEventListener("input", renderProjects);
-            control.addEventListener("change", renderProjects);
-        });
-
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
-                    revealObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.12 });
-
-        document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
-
-        setupCategories();
-        renderProjects();
-    </script>
+    setupCategories();
+    renderProjects();
+  </script>
 </body>
 
 </html>

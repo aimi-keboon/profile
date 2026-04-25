@@ -2,887 +2,690 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aimi Misman | Private Pixel Web Library</title>
-    <meta name="description"
-        content="A private pixel-themed library of favorite apps, websites, tools, references, and web previews." />
-    <meta name="author" content="Aimi Misman" />
-    <meta name="robots" content="noindex, nofollow" />
-    <link rel="icon" type="image/png" href="aimi.png" />
-    <link rel="apple-touch-icon" href="aimi.png" />
-    <meta name="theme-color" content="#090b1a" />
-
-    <style>
-        :root {
-            --bg: #090b1a;
-            --bg-2: #11162d;
-            --surface: rgba(17, 22, 45, 0.92);
-            --surface-2: rgba(27, 35, 67, 0.92);
-            --panel: #161d38;
-            --text: #f8fbff;
-            --muted: #a9b4d0;
-            --line: rgba(92, 244, 255, 0.25);
-            --grid-line: rgba(92, 244, 255, 0.07);
-            --neon: #5cf4ff;
-            --neon-2: #ff4fd8;
-            --green: #7cff6b;
-            --yellow: #ffd166;
-            --danger: #ff6b8a;
-            --shadow: 8px 8px 0 #040511;
-            --shadow-soft: 0 0 28px rgba(92, 244, 255, 0.12);
-            --max: 1180px;
-            --pixel-border: 3px solid var(--neon);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            min-height: 100vh;
-            color: var(--text);
-            font-family: "Courier New", Courier, monospace;
-            line-height: 1.65;
-            background:
-                linear-gradient(var(--grid-line) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
-                radial-gradient(circle at 14% 6%, rgba(255, 79, 216, 0.25), transparent 28%),
-                radial-gradient(circle at 88% 0%, rgba(92, 244, 255, 0.22), transparent 32%),
-                linear-gradient(180deg, var(--bg), var(--bg-2));
-            background-size: 24px 24px, 24px 24px, auto, auto, auto;
-            image-rendering: pixelated;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            background: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 4px);
-            mix-blend-mode: screen;
-            opacity: 0.24;
-            z-index: 999;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        button,
-        input,
-        select {
-            font: inherit;
-        }
-
-        button {
-            cursor: pointer;
-        }
-
-        code {
-            color: var(--green);
-        }
-
-        .container {
-            width: min(var(--max), calc(100% - 28px));
-            margin: 0 auto;
-        }
-
-        .skip-link {
-            position: absolute;
-            left: -999px;
-            top: 8px;
-            background: var(--green);
-            color: #061006;
-            padding: 8px 12px;
-            z-index: 1000;
-        }
-
-        .skip-link:focus {
-            left: 8px;
-        }
-
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(9, 11, 26, 0.9);
-            border-bottom: var(--pixel-border);
-            box-shadow: 0 0 22px rgba(92, 244, 255, 0.18);
-            backdrop-filter: blur(12px);
-        }
-
-        .nav-inner {
-            min-height: 72px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 18px;
-        }
-
-        .brand-wrap {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 900;
-            letter-spacing: -0.04em;
-            text-transform: uppercase;
-            color: var(--text);
-        }
-
-        .logo-mark {
-            width: 44px;
-            height: 44px;
-            display: grid;
-            place-items: center;
-            border: 3px solid var(--text);
-            background: linear-gradient(135deg, var(--neon), var(--neon-2));
-            box-shadow: 4px 4px 0 #000;
-            overflow: hidden;
-        }
-
-        .logo-mark img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            image-rendering: pixelated;
-            filter: contrast(1.15) saturate(1.15);
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .nav-link {
-            border: 2px solid rgba(255, 255, 255, 0.28);
-            background: #11162d;
-            color: var(--muted);
-            padding: 9px 12px;
-            box-shadow: 4px 4px 0 #000;
-            font-weight: 800;
-            transition: transform 120ms ease, color 120ms ease, border-color 120ms ease;
-        }
-
-        .nav-link:hover,
-        .nav-link:focus-visible {
-            transform: translate(-2px, -2px);
-            color: var(--neon);
-            border-color: var(--neon);
-        }
-
-        .hero {
-            padding: 58px 0 26px;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.15fr 0.85fr;
-            gap: 22px;
-            align-items: stretch;
-        }
-
-        .pixel-card {
-            border: var(--pixel-border);
-            background: var(--surface);
-            box-shadow: var(--shadow), var(--shadow-soft);
-            position: relative;
-        }
-
-        .pixel-card::before {
-            content: "";
-            position: absolute;
-            inset: 7px;
-            border: 1px dashed rgba(255, 255, 255, 0.14);
-            pointer-events: none;
-        }
-
-        .hero-copy,
-        .command-panel,
-        .section-panel {
-            padding: 26px;
-        }
-
-        .terminal-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 16px;
-            padding: 7px 11px;
-            background: #060713;
-            border: 2px solid rgba(124, 255, 107, 0.6);
-            color: var(--green);
-            font-weight: 900;
-            text-transform: uppercase;
-            font-size: 0.86rem;
-            box-shadow: 4px 4px 0 #000;
-        }
-
-        .terminal-dot {
-            width: 10px;
-            height: 10px;
-            background: var(--green);
-            box-shadow: 0 0 12px var(--green);
-            display: inline-block;
-        }
-
-        h1,
-        h2,
-        h3 {
-            line-height: 1.05;
-            letter-spacing: -0.07em;
-            text-transform: uppercase;
-        }
-
-        h1 {
-            font-size: clamp(2.3rem, 6vw, 5rem);
-            margin-bottom: 18px;
-            text-shadow: 4px 4px 0 #000, 0 0 18px rgba(92, 244, 255, 0.22);
-        }
-
-        h2 {
-            font-size: clamp(1.55rem, 3.5vw, 2.6rem);
-            margin-bottom: 10px;
-        }
-
-        h3 {
-            font-size: 1.12rem;
-        }
-
-        p,
-        li {
-            color: var(--muted);
-        }
-
-        .lead {
-            font-size: 1.02rem;
-            max-width: 760px;
-            margin-bottom: 22px;
-        }
-
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            min-height: 46px;
-            border: 3px solid var(--text);
-            padding: 10px 15px;
-            background: var(--panel);
-            color: var(--text);
-            font-weight: 900;
-            box-shadow: 5px 5px 0 #000;
-            text-transform: uppercase;
-            transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
-        }
-
-        .btn:hover,
-        .btn:focus-visible {
-            transform: translate(-2px, -2px);
-            box-shadow: 7px 7px 0 #000;
-        }
-
-        .btn-primary {
-            color: #050711;
-            background: linear-gradient(135deg, var(--neon), var(--green));
-        }
-
-        .btn-pink {
-            background: linear-gradient(135deg, var(--neon-2), #8c5cff);
-            color: white;
-        }
-
-        .btn-small {
-            min-height: 38px;
-            padding: 7px 10px;
-            font-size: 0.84rem;
-            border-width: 2px;
-            box-shadow: 4px 4px 0 #000;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 22px;
-        }
-
-        .stat {
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            background: rgba(6, 7, 19, 0.72);
-            padding: 14px;
-            box-shadow: 4px 4px 0 #000;
-        }
-
-        .stat strong {
-            display: block;
-            color: var(--neon);
-            font-size: 1.32rem;
-            line-height: 1;
-            margin-bottom: 6px;
-        }
-
-        .stat span {
-            color: var(--muted);
-            font-size: 0.86rem;
-        }
-
-        .terminal-screen {
-            height: 100%;
-            min-height: 322px;
-            background: #050711;
-            border: 3px solid rgba(255, 255, 255, 0.22);
-            box-shadow: inset 0 0 22px rgba(92, 244, 255, 0.12);
-            padding: 18px;
-            overflow: hidden;
-        }
-
-        .screen-top {
-            display: flex;
-            gap: 7px;
-            margin-bottom: 18px;
-        }
-
-        .screen-top span {
-            width: 12px;
-            height: 12px;
-            display: block;
-            border: 2px solid #000;
-            background: var(--neon-2);
-        }
-
-        .screen-top span:nth-child(2) {
-            background: var(--yellow);
-        }
-
-        .screen-top span:nth-child(3) {
-            background: var(--green);
-        }
-
-        .code-line {
-            color: var(--green);
-            margin: 10px 0;
-            white-space: nowrap;
-        }
-
-        .code-line span {
-            color: var(--neon);
-        }
-
-        .blink {
-            display: inline-block;
-            width: 10px;
-            height: 1.05em;
-            background: var(--green);
-            vertical-align: -0.15em;
-            animation: blink 1s steps(2, start) infinite;
-        }
-
-        @keyframes blink {
-            50% {
-                opacity: 0;
-            }
-        }
-
-        .section {
-            padding: 42px 0;
-        }
-
-        .section-head {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: end;
-            gap: 18px;
-            margin-bottom: 18px;
-        }
-
-        .kicker {
-            color: var(--neon-2);
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            font-size: 0.82rem;
-            margin-bottom: 7px;
-        }
-
-        .controls {
-            display: grid;
-            grid-template-columns: 1.2fr 220px 180px;
-            gap: 12px;
-            margin-bottom: 18px;
-        }
-
-        .field,
-        .select {
-            width: 100%;
-            min-height: 48px;
-            border: 3px solid rgba(255, 255, 255, 0.24);
-            background: #050711;
-            color: var(--text);
-            padding: 10px 12px;
-            box-shadow: 4px 4px 0 #000;
-            outline: none;
-        }
-
-        .field:focus,
-        .select:focus {
-            border-color: var(--neon);
-            box-shadow: 4px 4px 0 #000, 0 0 18px rgba(92, 244, 255, 0.22);
-        }
-
-        .library-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr));
-            gap: 18px;
-        }
-
-        .site-card {
-            border: 3px solid rgba(255, 255, 255, 0.2);
-            background: var(--surface-2);
-            box-shadow: 6px 6px 0 #000;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            min-height: 100%;
-        }
-
-        .site-card[data-featured="true"] {
-            border-color: var(--neon);
-        }
-
-        .site-head {
-            display: flex;
-            justify-content: space-between;
-            gap: 14px;
-            padding: 18px;
-            border-bottom: 3px solid rgba(255, 255, 255, 0.14);
-            background: rgba(5, 7, 17, 0.48);
-        }
-
-        .site-title {
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-        }
-
-        .favicon {
-            width: 42px;
-            height: 42px;
-            flex: 0 0 auto;
-            display: grid;
-            place-items: center;
-            border: 3px solid var(--text);
-            background: linear-gradient(135deg, var(--neon), var(--neon-2));
-            color: #050711;
-            font-weight: 900;
-            box-shadow: 4px 4px 0 #000;
-            text-transform: uppercase;
-        }
-
-        .site-url {
-            color: var(--neon);
-            font-size: 0.84rem;
-            word-break: break-all;
-        }
-
-        .site-body {
-            padding: 18px;
-            flex: 1;
-        }
-
-        .description {
-            margin: 10px 0 14px;
-        }
-
-        .tag-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 12px;
-        }
-
-        .tag {
-            border: 2px solid rgba(92, 244, 255, 0.35);
-            background: rgba(92, 244, 255, 0.08);
-            color: var(--neon);
-            padding: 5px 8px;
-            font-size: 0.78rem;
-            font-weight: 900;
-            text-transform: uppercase;
-        }
-
-        .site-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            padding: 0 18px 18px;
-        }
-
-        details.preview {
-            border-top: 3px solid rgba(255, 255, 255, 0.14);
-            background: #050711;
-        }
-
-        details.preview summary {
-            list-style: none;
-            cursor: pointer;
-            padding: 14px 18px;
-            color: var(--green);
-            font-weight: 900;
-            text-transform: uppercase;
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-        }
-
-        details.preview summary::-webkit-details-marker {
-            display: none;
-        }
-
-        details.preview summary::after {
-            content: "+";
-            color: var(--neon);
-        }
-
-        details.preview[open] summary::after {
-            content: "-";
-            color: var(--neon-2);
-        }
-
-        .frame-shell {
-            height: 360px;
-            border-top: 3px solid rgba(92, 244, 255, 0.3);
-            background: linear-gradient(45deg, rgba(92, 244, 255, 0.08) 25%, transparent 25%), linear-gradient(-45deg, rgba(92, 244, 255, 0.08) 25%, transparent 25%), #0a0d1e;
-            background-size: 18px 18px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .frame-shell iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-            display: block;
-            background: white;
-        }
-
-        .frame-note {
-            padding: 10px 18px 16px;
-            font-size: 0.84rem;
-            color: var(--muted);
-        }
-
-        .empty-state {
-            display: none;
-            border: 3px dashed rgba(255, 255, 255, 0.24);
-            background: rgba(5, 7, 17, 0.72);
-            padding: 28px;
-            color: var(--muted);
-            text-align: center;
-            box-shadow: 6px 6px 0 #000;
-        }
-
-        .source-note {
-            display: grid;
-            gap: 12px;
-            margin-top: 14px;
-            border: 3px solid rgba(124, 255, 107, 0.32);
-            background: rgba(5, 7, 17, 0.72);
-            padding: 18px;
-            box-shadow: 6px 6px 0 #000;
-        }
-
-        footer {
-            padding: 26px 0 40px;
-            color: var(--muted);
-            text-align: center;
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(12px);
-            transition: opacity 450ms ease, transform 450ms ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media (max-width: 940px) {
-
-            .hero-grid,
-            .controls {
-                grid-template-columns: 1fr;
-            }
-
-            .section-head {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 680px) {
-
-            .nav-inner,
-            .nav-actions {
-                align-items: stretch;
-                flex-direction: column;
-                padding: 12px 0;
-            }
-
-            .nav-link,
-            .btn {
-                width: 100%;
-            }
-
-            .hero {
-                padding-top: 34px;
-            }
-
-            .hero-copy,
-            .command-panel,
-            .section-panel {
-                padding: 20px;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .frame-shell {
-                height: 300px;
-            }
-
-            .code-line {
-                white-space: normal;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aimi Misman | Private Pixel Web Library</title>
+  <meta name="description" content="A private pixel-themed library of favorite apps, websites, tools, references, and web previews." />
+  <meta name="author" content="Aimi Misman" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="aimi.png" />
+  <link rel="apple-touch-icon" href="aimi.png" />
+  <meta name="theme-color" content="#090b1a" />
+
+  <style>
+    :root {
+      --bg: #090b1a;
+      --bg-2: #11162d;
+      --surface: rgba(17, 22, 45, 0.92);
+      --surface-2: rgba(27, 35, 67, 0.92);
+      --panel: #161d38;
+      --text: #f8fbff;
+      --muted: #a9b4d0;
+      --line: rgba(92, 244, 255, 0.25);
+      --grid-line: rgba(92, 244, 255, 0.07);
+      --neon: #5cf4ff;
+      --neon-2: #ff4fd8;
+      --green: #7cff6b;
+      --yellow: #ffd166;
+      --danger: #ff6b8a;
+      --shadow: 8px 8px 0 #040511;
+      --shadow-soft: 0 0 28px rgba(92, 244, 255, 0.12);
+      --max: 1180px;
+      --pixel-border: 3px solid var(--neon);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "Courier New", Courier, monospace;
+      line-height: 1.65;
+      background:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+        radial-gradient(circle at 14% 6%, rgba(255, 79, 216, 0.25), transparent 28%),
+        radial-gradient(circle at 88% 0%, rgba(92, 244, 255, 0.22), transparent 32%),
+        linear-gradient(180deg, var(--bg), var(--bg-2));
+      background-size: 24px 24px, 24px 24px, auto, auto, auto;
+      image-rendering: pixelated;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(180deg, rgba(255,255,255,0.03) 0, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 4px);
+      mix-blend-mode: screen;
+      opacity: 0.24;
+      z-index: 999;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    code { color: var(--green); }
+
+    .container { width: min(var(--max), calc(100% - 28px)); margin: 0 auto; }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 8px;
+      background: var(--green);
+      color: #061006;
+      padding: 8px 12px;
+      z-index: 1000;
+    }
+    .skip-link:focus { left: 8px; }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 11, 26, 0.9);
+      border-bottom: var(--pixel-border);
+      box-shadow: 0 0 22px rgba(92, 244, 255, 0.18);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .logo-mark {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 3px solid var(--text);
+      background: linear-gradient(135deg, var(--neon), var(--neon-2));
+      box-shadow: 4px 4px 0 #000;
+      overflow: hidden;
+    }
+
+    .logo-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      image-rendering: pixelated;
+      filter: contrast(1.15) saturate(1.15);
+    }
+
+    .nav-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+    .nav-link {
+      border: 2px solid rgba(255, 255, 255, 0.28);
+      background: #11162d;
+      color: var(--muted);
+      padding: 9px 12px;
+      box-shadow: 4px 4px 0 #000;
+      font-weight: 800;
+      transition: transform 120ms ease, color 120ms ease, border-color 120ms ease;
+    }
+
+    .nav-link:hover, .nav-link:focus-visible {
+      transform: translate(-2px, -2px);
+      color: var(--neon);
+      border-color: var(--neon);
+    }
+
+    .hero { padding: 58px 0 26px; }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .pixel-card {
+      border: var(--pixel-border);
+      background: var(--surface);
+      box-shadow: var(--shadow), var(--shadow-soft);
+      position: relative;
+    }
+
+    .pixel-card::before {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      border: 1px dashed rgba(255, 255, 255, 0.14);
+      pointer-events: none;
+    }
+
+    .hero-copy, .command-panel, .section-panel { padding: 26px; }
+
+    .terminal-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 7px 11px;
+      background: #060713;
+      border: 2px solid rgba(124, 255, 107, 0.6);
+      color: var(--green);
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 0.86rem;
+      box-shadow: 4px 4px 0 #000;
+    }
+
+    .terminal-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--green);
+      box-shadow: 0 0 12px var(--green);
+      display: inline-block;
+    }
+
+    h1, h2, h3 { line-height: 1.05; letter-spacing: -0.07em; text-transform: uppercase; }
+    h1 { font-size: clamp(2.3rem, 6vw, 5rem); margin-bottom: 18px; text-shadow: 4px 4px 0 #000, 0 0 18px rgba(92, 244, 255, 0.22); }
+    h2 { font-size: clamp(1.55rem, 3.5vw, 2.6rem); margin-bottom: 10px; }
+    h3 { font-size: 1.12rem; }
+    p, li { color: var(--muted); }
+    .lead { font-size: 1.02rem; max-width: 760px; margin-bottom: 22px; }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      border: 3px solid var(--text);
+      padding: 10px 15px;
+      background: var(--panel);
+      color: var(--text);
+      font-weight: 900;
+      box-shadow: 5px 5px 0 #000;
+      text-transform: uppercase;
+      transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+    }
+
+    .btn:hover, .btn:focus-visible { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 #000; }
+    .btn-primary { color: #050711; background: linear-gradient(135deg, var(--neon), var(--green)); }
+    .btn-pink { background: linear-gradient(135deg, var(--neon-2), #8c5cff); color: white; }
+    .btn-small { min-height: 38px; padding: 7px 10px; font-size: 0.84rem; border-width: 2px; box-shadow: 4px 4px 0 #000; }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 22px; }
+    .stat { border: 2px solid rgba(255,255,255,0.2); background: rgba(6,7,19,0.72); padding: 14px; box-shadow: 4px 4px 0 #000; }
+    .stat strong { display: block; color: var(--neon); font-size: 1.32rem; line-height: 1; margin-bottom: 6px; }
+    .stat span { color: var(--muted); font-size: 0.86rem; }
+
+    .terminal-screen {
+      height: 100%;
+      min-height: 322px;
+      background: #050711;
+      border: 3px solid rgba(255, 255, 255, 0.22);
+      box-shadow: inset 0 0 22px rgba(92, 244, 255, 0.12);
+      padding: 18px;
+      overflow: hidden;
+    }
+
+    .screen-top { display: flex; gap: 7px; margin-bottom: 18px; }
+    .screen-top span { width: 12px; height: 12px; display: block; border: 2px solid #000; background: var(--neon-2); }
+    .screen-top span:nth-child(2) { background: var(--yellow); }
+    .screen-top span:nth-child(3) { background: var(--green); }
+    .code-line { color: var(--green); margin: 10px 0; white-space: nowrap; }
+    .code-line span { color: var(--neon); }
+    .blink { display: inline-block; width: 10px; height: 1.05em; background: var(--green); vertical-align: -0.15em; animation: blink 1s steps(2, start) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .section { padding: 42px 0; }
+    .section-head { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 18px; margin-bottom: 18px; }
+    .kicker { color: var(--neon-2); font-weight: 900; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.82rem; margin-bottom: 7px; }
+
+    .controls { display: grid; grid-template-columns: 1.2fr 220px 180px; gap: 12px; margin-bottom: 18px; }
+    .field, .select {
+      width: 100%;
+      min-height: 48px;
+      border: 3px solid rgba(255,255,255,0.24);
+      background: #050711;
+      color: var(--text);
+      padding: 10px 12px;
+      box-shadow: 4px 4px 0 #000;
+      outline: none;
+    }
+    .field:focus, .select:focus { border-color: var(--neon); box-shadow: 4px 4px 0 #000, 0 0 18px rgba(92,244,255,0.22); }
+
+    .library-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap: 18px; }
+    .site-card { border: 3px solid rgba(255,255,255,0.2); background: var(--surface-2); box-shadow: 6px 6px 0 #000; overflow: hidden; display: flex; flex-direction: column; min-height: 100%; }
+    .site-card[data-featured="true"] { border-color: var(--neon); }
+    .site-head { display: flex; justify-content: space-between; gap: 14px; padding: 18px; border-bottom: 3px solid rgba(255,255,255,0.14); background: rgba(5,7,17,0.48); }
+    .site-title { display: flex; gap: 12px; align-items: flex-start; }
+    .favicon { width: 42px; height: 42px; flex: 0 0 auto; display: grid; place-items: center; border: 3px solid var(--text); background: linear-gradient(135deg, var(--neon), var(--neon-2)); color: #050711; font-weight: 900; box-shadow: 4px 4px 0 #000; text-transform: uppercase; }
+    .site-url { color: var(--neon); font-size: 0.84rem; word-break: break-all; }
+    .site-body { padding: 18px; flex: 1; }
+    .description { margin: 10px 0 14px; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tag { border: 2px solid rgba(92,244,255,0.35); background: rgba(92,244,255,0.08); color: var(--neon); padding: 5px 8px; font-size: 0.78rem; font-weight: 900; text-transform: uppercase; }
+    .site-actions { display: flex; flex-wrap: wrap; gap: 10px; padding: 0 18px 18px; }
+
+    details.preview { border-top: 3px solid rgba(255,255,255,0.14); background: #050711; }
+    details.preview summary { list-style: none; cursor: pointer; padding: 14px 18px; color: var(--green); font-weight: 900; text-transform: uppercase; display: flex; justify-content: space-between; gap: 12px; }
+    details.preview summary::-webkit-details-marker { display: none; }
+    details.preview summary::after { content: "+"; color: var(--neon); }
+    details.preview[open] summary::after { content: "-"; color: var(--neon-2); }
+
+    .frame-shell {
+      height: 360px;
+      border-top: 3px solid rgba(92,244,255,0.3);
+      background: linear-gradient(45deg, rgba(92,244,255,0.08) 25%, transparent 25%), linear-gradient(-45deg, rgba(92,244,255,0.08) 25%, transparent 25%), #0a0d1e;
+      background-size: 18px 18px;
+      overflow: hidden;
+      position: relative;
+    }
+    .frame-shell iframe { width: 100%; height: 100%; border: 0; display: block; background: white; }
+    .frame-note { padding: 10px 18px 16px; font-size: 0.84rem; color: var(--muted); }
+    .empty-state { display: none; border: 3px dashed rgba(255,255,255,0.24); background: rgba(5,7,17,0.72); padding: 28px; color: var(--muted); text-align: center; box-shadow: 6px 6px 0 #000; }
+
+    .source-note {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+      border: 3px solid rgba(124,255,107,0.32);
+      background: rgba(5,7,17,0.72);
+      padding: 18px;
+      box-shadow: 6px 6px 0 #000;
+    }
+
+    footer { padding: 26px 0 40px; color: var(--muted); text-align: center; }
+    .reveal { opacity: 0; transform: translateY(12px); transition: opacity 450ms ease, transform 450ms ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 940px) {
+      .hero-grid, .controls { grid-template-columns: 1fr; }
+      .section-head { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .nav-inner, .nav-actions { align-items: stretch; flex-direction: column; padding: 12px 0; }
+      .nav-link, .btn { width: 100%; }
+      .hero { padding-top: 34px; }
+      .hero-copy, .command-panel, .section-panel { padding: 20px; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .frame-shell { height: 300px; }
+      .code-line { white-space: normal; }
+    }
+
+    /* Shared portfolio navigation header */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 11, 26, 0.9);
+      border-bottom: 2px solid var(--neon);
+      box-shadow: 0 6px 0 rgba(0,0,0,0.6);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-direction: row;
+      padding: 0;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .brand-wrap span:last-child::after {
+      content: "_DEV";
+      color: var(--neon);
+      margin-left: 6px;
+    }
+
+    .logo-mark {
+      flex: 0 0 auto;
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--neon);
+      background: linear-gradient(135deg, #7c5cff, var(--neon-2));
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.8);
+      overflow: hidden;
+      image-rendering: pixelated;
+    }
+
+    .logo-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      image-rendering: pixelated;
+      filter: contrast(1.15) saturate(1.15);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.86rem;
+      padding: 9px 12px;
+      border: 2px solid transparent;
+      font-weight: 800;
+      text-transform: uppercase;
+      transition: color 140ms ease, background 140ms ease, border-color 140ms ease, transform 140ms steps(2);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #06111d;
+      background: var(--neon);
+      border-color: var(--text);
+      transform: translate(-2px, -2px);
+      box-shadow: 3px 3px 0 rgba(0,0,0,0.8);
+    }
+
+    .menu-btn {
+      display: none;
+      border: 2px solid var(--neon);
+      background: #0c1024;
+      color: var(--neon);
+      padding: 10px 12px;
+      cursor: pointer;
+      font-weight: 900;
+      text-transform: uppercase;
+      box-shadow: 3px 3px 0 rgba(0,0,0,0.8);
+    }
+
+    @media (max-width: 860px) {
+      .menu-btn { display: inline-flex; }
+
+      .nav-links {
+        position: absolute;
+        top: 76px;
+        left: 14px;
+        right: 14px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        background: rgba(9, 11, 26, 0.98);
+        border: 2px solid var(--neon);
+        padding: 10px;
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open { display: flex; }
+    }
+
+    @media (max-width: 680px) {
+      .nav-inner {
+        min-height: 76px;
+        flex-direction: row;
+        align-items: center;
+        padding: 0;
+      }
+    }
+
+  </style>
 </head>
 
 <body>
-    <a class="skip-link" href="#library">Skip to library</a>
+  <a class="skip-link" href="#library">Skip to library</a>
 
-    <header class="navbar">
-        <div class="container nav-inner">
-            <a href="#top" class="brand-wrap" aria-label="Aimi Web Library home">
-                <span class="logo-mark" aria-hidden="true"><img src="aimi.png" alt=""
-                        onerror="this.style.display='none'" /></span>
-                <span>Aimi Web Library</span>
-            </a>
-            <div class="nav-actions">
-                <a class="nav-link" href="index.html">My Profile</a>
-                <a class="nav-link" href="fav.html">My Library</a>
-                <a class="nav-link" href="lab.html">My Laboratory</a>
-            </div>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-wrap" aria-label="Aimi Misman home">
+        <span class="logo-mark" aria-hidden="true">
+          <img src="aimi.png" alt="" onerror="this.style.display='none'" />
+        </span>
+        <span>Aimi Misman</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="index.html">My Profile</a>
+        <a href="fav.html">My Library</a>
+        <a href="lab.html">My Laboratory</a>
+      </nav>
+
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-label="Open navigation">MENU.EXE</button>
+    </div>
+  </header>
+
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="pixel-card hero-copy reveal">
+          <div class="terminal-label"><span class="terminal-dot"></span> private://favorite-sites</div>
+          <h1>Pixel Web Library</h1>
+          <p class="lead">
+            A private arcade-style vault for favorite apps, websites, tools, references, and rabbit-hole links. Search,
+            filter, open, and preview your hardcoded collection — no public add form, no visitor input.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#library">Browse Library</a>
+          </div>
+          <div class="stats-grid" aria-label="Library stats">
+            <div class="stat"><strong id="totalSites">0</strong><span>Total sites</span></div>
+            <div class="stat"><strong id="totalCategories">0</strong><span>Categories</span></div>
+            <div class="stat"><strong>CODE</strong><span>Hardcoded only</span></div>
+          </div>
         </div>
-    </header>
 
-    <main id="top">
-        <section class="hero">
-            <div class="container hero-grid">
-                <div class="pixel-card hero-copy reveal">
-                    <div class="terminal-label"><span class="terminal-dot"></span> private://favorite-sites</div>
-                    <h1>Pixel Web Library</h1>
-                    <p class="lead">
-                        A private arcade-style vault for favorite apps, websites, tools, references, and rabbit-hole
-                        links. Search,
-                        filter, open, and preview your hardcoded collection — no public add form, no visitor input.
-                    </p>
-                    <div class="hero-actions">
-                        <a class="btn btn-primary" href="#library">Browse Library</a>
-                    </div>
-                    <div class="stats-grid" aria-label="Library stats">
-                        <div class="stat"><strong id="totalSites">0</strong><span>Total sites</span></div>
-                        <div class="stat"><strong id="totalCategories">0</strong><span>Categories</span></div>
-                        <div class="stat"><strong>CODE</strong><span>Hardcoded only</span></div>
-                    </div>
-                </div>
+        <aside class="pixel-card command-panel reveal" aria-label="Terminal style summary">
+          <div class="terminal-screen">
+            <div class="screen-top"><span></span><span></span><span></span></div>
+            <div class="code-line">&gt; <span>boot</span> private_library.exe</div>
+            <div class="code-line">&gt; loading favorites...</div>
+            <div class="code-line">&gt; search: enabled</div>
+            <div class="code-line">&gt; filters: category / tag</div>
+            <div class="code-line">&gt; iframe previews: collapsible</div>
+            <div class="code-line">&gt; edits: source code only</div>
+            <div class="code-line">&gt; status: locked <i class="blink"></i></div>
+          </div>
+        </aside>
+      </div>
+    </section>
 
-                <aside class="pixel-card command-panel reveal" aria-label="Terminal style summary">
-                    <div class="terminal-screen">
-                        <div class="screen-top"><span></span><span></span><span></span></div>
-                        <div class="code-line">&gt; <span>boot</span> private_library.exe</div>
-                        <div class="code-line">&gt; loading favorites...</div>
-                        <div class="code-line">&gt; search: enabled</div>
-                        <div class="code-line">&gt; filters: category / tag</div>
-                        <div class="code-line">&gt; iframe previews: collapsible</div>
-                        <div class="code-line">&gt; edits: source code only</div>
-                        <div class="code-line">&gt; status: locked <i class="blink"></i></div>
-                    </div>
-                </aside>
+    <section class="section" id="library">
+      <div class="container">
+        <div class="pixel-card section-panel reveal">
+          <div class="section-head">
+            <div>
+              <div class="kicker">Library Index</div>
+              <h2>Favorite websites & apps</h2>
+              <p>Use search and filters to browse your private hardcoded collection. Each card has a collapsible live preview.</p>
             </div>
-        </section>
+            <button class="btn btn-small" type="button" id="expandAllBtn">Expand All Previews</button>
+          </div>
 
-        <section class="section" id="library">
-            <div class="container">
-                <div class="pixel-card section-panel reveal">
-                    <div class="section-head">
-                        <div>
-                            <div class="kicker">Library Index</div>
-                            <h2>Favorite websites & apps</h2>
-                            <p>Use search and filters to browse your private hardcoded collection. Each card has a
-                                collapsible live preview.</p>
-                        </div>
-                        <button class="btn btn-small" type="button" id="expandAllBtn">Expand All Previews</button>
-                    </div>
+          <div class="controls" role="search">
+            <input class="field" id="searchInput" type="search" placeholder="Search by name, URL, tag, category, or note..." aria-label="Search websites" />
+            <select class="select" id="categoryFilter" aria-label="Filter by category">
+              <option value="all">All categories</option>
+            </select>
+            <select class="select" id="sortSelect" aria-label="Sort websites">
+              <option value="featured">Featured first</option>
+              <option value="az">A to Z</option>
+              <option value="category">Category</option>
+              <option value="newest">Newest added</option>
+            </select>
+          </div>
 
-                    <div class="controls" role="search">
-                        <input class="field" id="searchInput" type="search"
-                            placeholder="Search by name, URL, tag, category, or note..." aria-label="Search websites" />
-                        <select class="select" id="categoryFilter" aria-label="Filter by category">
-                            <option value="all">All categories</option>
-                        </select>
-                        <select class="select" id="sortSelect" aria-label="Sort websites">
-                            <option value="featured">Featured first</option>
-                            <option value="az">A to Z</option>
-                            <option value="category">Category</option>
-                            <option value="newest">Newest added</option>
-                        </select>
-                    </div>
+          <div class="library-grid" id="libraryGrid" aria-live="polite"></div>
+          <div class="empty-state" id="emptyState">No websites found. Try another search or category.</div>
+        </div>
+      </div>
+    </section>
 
-                    <div class="library-grid" id="libraryGrid" aria-live="polite"></div>
-                    <div class="empty-state" id="emptyState">No websites found. Try another search or category.</div>
-                </div>
-            </div>
-        </section>
+    
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Aimi Misman · Private pixel library.</div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+    const navAnchors = [...document.querySelectorAll(".nav-links a")];
+
+    if (menuBtn && navLinks) {
+      menuBtn.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        menuBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+
+      navAnchors.forEach(anchor => {
+        const targetFile = anchor.getAttribute("href").split("#")[0];
+        const currentFile = window.location.pathname.split("/").pop() || "index.html";
+        if (targetFile === currentFile) anchor.classList.add("active");
+
+        anchor.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          menuBtn.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
 
 
-    </main>
+    const sites = [
+      {
+  id: "welib",
+  name: "WeLib",
+  url: "https://welib.org",
+  category: "Reading",
+  tags: ["books", "articles", "research", "library"],
+  featured: true,
+  createdAt: "2026-04-25T00:00:00.000Z",
+  description: "A web library/search site commonly shared as a place to discover books and scholarly articles. Use it thoughtfully and make sure any material you access is legal and safe in your location."
+},
+{
+  id: "ifixit",
+  name: "iFixit",
+  url: "https://www.ifixit.com",
+  category: "Repair",
+  tags: ["repair", "diy", "electronics", "guides", "tools"],
+  featured: true,
+  createdAt: "2026-04-25T00:00:01.000Z",
+  description: "A repair guide website with step-by-step manuals for fixing electronics, devices, appliances, and other everyday items."
+},
+{
+  id: "napkin-ai",
+  name: "Napkin AI",
+  url: "https://www.napkin.ai",
+  category: "AI Tools",
+  tags: ["ai", "visuals", "diagrams", "presentation", "storytelling"],
+  featured: true,
+  createdAt: "2026-04-25T00:00:02.000Z",
+  description: "An AI visual tool that turns written ideas into diagrams, graphics, and presentation-style visuals for clearer communication."
+},
+{
+  id: "musclewiki",
+  name: "MuscleWiki",
+  url: "https://musclewiki.com",
+  category: "Fitness",
+  tags: ["fitness", "workout", "exercise", "muscle", "training"],
+  featured: false,
+  createdAt: "2026-04-25T00:00:03.000Z",
+  description: "An exercise library with muscle-based browsing, workout guidance, exercise demos, and fitness learning resources."
+},
+{
+  id: "diode",
+  name: "Diode",
+  url: "https://withdiode.com",
+  category: "Coding & Hardware",
+  tags: ["electronics", "circuits", "simulator", "hardware", "coding"],
+  featured: false,
+  createdAt: "2026-04-25T00:00:04.000Z",
+  description: "A browser-based electronics tool for designing, drawing, testing, and simulating circuit or hardware project ideas."
+},
+{
+  id: "instructables",
+  name: "Instructables",
+  url: "https://www.instructables.com",
+  category: "DIY",
+  tags: ["diy", "projects", "tutorials", "crafts", "maker"],
+  featured: false,
+  createdAt: "2026-04-25T00:00:05.000Z",
+  description: "A community website for step-by-step DIY projects, maker tutorials, crafts, electronics builds, cooking guides, and creative how-to ideas."
+}
+    ];
 
-    <footer>
-        <div class="container">© <span id="year"></span> Aimi Misman · Private pixel library.</div>
-    </footer>
+    const grid = document.getElementById("libraryGrid");
+    const emptyState = document.getElementById("emptyState");
+    const searchInput = document.getElementById("searchInput");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const sortSelect = document.getElementById("sortSelect");
+    const expandAllBtn = document.getElementById("expandAllBtn");
 
-    <script>
-        const sites = [
-            {
-                id: "instructables",
-                name: "Instructables",
-                url: "https://www.instructables.com",
-                category: "DIY",
-                tags: ["diy", "projects", "tutorials", "crafts", "maker"],
-                featured: false,
-                createdAt: "2026-04-25T00:00:05.000Z",
-                description: "A community website for step-by-step DIY projects, maker tutorials, crafts, electronics builds, cooking guides, and creative how-to ideas."
-            },
-            {
-                id: "welib",
-                name: "WeLib",
-                url: "https://welib.org",
-                category: "Reading",
-                tags: ["books", "articles", "research", "library"],
-                featured: true,
-                createdAt: "2026-04-25T00:00:00.000Z",
-                description: "A web library/search site commonly shared as a place to discover books and scholarly articles. Use it thoughtfully and make sure any material you access is legal and safe in your location."
-            },
-            {
-                id: "ifixit",
-                name: "iFixit",
-                url: "https://www.ifixit.com",
-                category: "Repair",
-                tags: ["repair", "diy", "electronics", "guides", "tools"],
-                featured: true,
-                createdAt: "2026-04-25T00:00:01.000Z",
-                description: "A repair guide website with step-by-step manuals for fixing electronics, devices, appliances, and other everyday items."
-            },
-            {
-                id: "napkin-ai",
-                name: "Napkin AI",
-                url: "https://www.napkin.ai",
-                category: "AI Tools",
-                tags: ["ai", "visuals", "diagrams", "presentation", "storytelling"],
-                featured: true,
-                createdAt: "2026-04-25T00:00:02.000Z",
-                description: "An AI visual tool that turns written ideas into diagrams, graphics, and presentation-style visuals for clearer communication."
-            },
-            {
-                id: "musclewiki",
-                name: "MuscleWiki",
-                url: "https://musclewiki.com",
-                category: "Fitness",
-                tags: ["fitness", "workout", "exercise", "muscle", "training"],
-                featured: false,
-                createdAt: "2026-04-25T00:00:03.000Z",
-                description: "An exercise library with muscle-based browsing, workout guidance, exercise demos, and fitness learning resources."
-            },
-            {
-                id: "diode",
-                name: "Diode",
-                url: "https://withdiode.com",
-                category: "Coding & Hardware",
-                tags: ["electronics", "circuits", "simulator", "hardware", "coding"],
-                featured: false,
-                createdAt: "2026-04-25T00:00:04.000Z",
-                description: "A browser-based electronics tool for designing, drawing, testing, and simulating circuit or hardware project ideas."
-            }
-        ];
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-        const grid = document.getElementById("libraryGrid");
-        const emptyState = document.getElementById("emptyState");
-        const searchInput = document.getElementById("searchInput");
-        const categoryFilter = document.getElementById("categoryFilter");
-        const sortSelect = document.getElementById("sortSelect");
-        const expandAllBtn = document.getElementById("expandAllBtn");
+    const safeText = (value) => String(value || "").replace(/[&<>'"]/g, char => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;"
+    }[char]));
 
-        document.getElementById("year").textContent = new Date().getFullYear();
+    const getInitials = (name) => {
+      const words = String(name || "?").trim().split(/\s+/).slice(0, 2);
+      return words.map(word => word[0]).join("").toUpperCase() || "?";
+    };
 
-        const safeText = (value) => String(value || "").replace(/[&<>'"]/g, char => ({
-            "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;"
-        }[char]));
+    const updateCategoryOptions = (siteList) => {
+      const current = categoryFilter.value;
+      const categories = [...new Set(siteList.map(site => site.category).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+      categoryFilter.innerHTML = '<option value="all">All categories</option>' + categories.map(category => `<option value="${safeText(category)}">${safeText(category)}</option>`).join("");
+      if (categories.includes(current)) categoryFilter.value = current;
+    };
 
-        const getInitials = (name) => {
-            const words = String(name || "?").trim().split(/\s+/).slice(0, 2);
-            return words.map(word => word[0]).join("").toUpperCase() || "?";
-        };
+    const renderStats = (siteList) => {
+      document.getElementById("totalSites").textContent = siteList.length;
+      document.getElementById("totalCategories").textContent = new Set(siteList.map(site => site.category)).size;
+    };
 
-        const updateCategoryOptions = (siteList) => {
-            const current = categoryFilter.value;
-            const categories = [...new Set(siteList.map(site => site.category).filter(Boolean))].sort((a, b) => a.localeCompare(b));
-            categoryFilter.innerHTML = '<option value="all">All categories</option>' + categories.map(category => `<option value="${safeText(category)}">${safeText(category)}</option>`).join("");
-            if (categories.includes(current)) categoryFilter.value = current;
-        };
+    const siteMatches = (site, query, category) => {
+      const searchable = [site.name, site.url, site.category, site.description, ...(site.tags || [])].join(" ").toLowerCase();
+      const categoryMatch = category === "all" || site.category === category;
+      return categoryMatch && searchable.includes(query.toLowerCase());
+    };
 
-        const renderStats = (siteList) => {
-            document.getElementById("totalSites").textContent = siteList.length;
-            document.getElementById("totalCategories").textContent = new Set(siteList.map(site => site.category)).size;
-        };
+    const sortSites = (siteList, mode) => {
+      return [...siteList].sort((a, b) => {
+        if (mode === "featured") return Number(b.featured) - Number(a.featured) || a.name.localeCompare(b.name);
+        if (mode === "az") return a.name.localeCompare(b.name);
+        if (mode === "category") return a.category.localeCompare(b.category) || a.name.localeCompare(b.name);
+        if (mode === "newest") return new Date(b.createdAt) - new Date(a.createdAt);
+        return 0;
+      });
+    };
 
-        const siteMatches = (site, query, category) => {
-            const searchable = [site.name, site.url, site.category, site.description, ...(site.tags || [])].join(" ").toLowerCase();
-            const categoryMatch = category === "all" || site.category === category;
-            return categoryMatch && searchable.includes(query.toLowerCase());
-        };
-
-        const sortSites = (siteList, mode) => {
-            return [...siteList].sort((a, b) => {
-                if (mode === "featured") return Number(b.featured) - Number(a.featured) || a.name.localeCompare(b.name);
-                if (mode === "az") return a.name.localeCompare(b.name);
-                if (mode === "category") return a.category.localeCompare(b.category) || a.name.localeCompare(b.name);
-                if (mode === "newest") return new Date(b.createdAt) - new Date(a.createdAt);
-                return 0;
-            });
-        };
-
-        const createCard = (site) => {
-            const tags = (site.tags || []).map(tag => `<span class="tag">${safeText(tag)}</span>`).join("");
-            const featured = site.featured ? "true" : "false";
-            return `
+    const createCard = (site) => {
+      const tags = (site.tags || []).map(tag => `<span class="tag">${safeText(tag)}</span>`).join("");
+      const featured = site.featured ? "true" : "false";
+      return `
         <article class="site-card reveal visible" data-featured="${featured}">
           <div class="site-head">
             <div class="site-title">
@@ -909,72 +712,72 @@
           </details>
         </article>
       `;
-        };
+    };
 
-        const lazyLoadOpenFrames = () => {
-            document.querySelectorAll("details.preview").forEach(details => {
-                details.addEventListener("toggle", () => {
-                    if (details.open) {
-                        const iframe = details.querySelector("iframe[data-src]");
-                        if (iframe && !iframe.src) iframe.src = iframe.dataset.src;
-                    }
-                });
-            });
-        };
-
-        const attachCopyButtons = () => {
-            document.querySelectorAll(".copy-btn").forEach(button => {
-                button.addEventListener("click", async () => {
-                    const originalText = button.textContent;
-                    try {
-                        await navigator.clipboard.writeText(button.dataset.url);
-                        button.textContent = "Copied";
-                    } catch (error) {
-                        button.textContent = "Copy URL";
-                    }
-                    window.setTimeout(() => button.textContent = originalText, 1400);
-                });
-            });
-        };
-
-        const renderLibrary = () => {
-            updateCategoryOptions(sites);
-            renderStats(sites);
-
-            const query = searchInput.value.trim();
-            const category = categoryFilter.value;
-            const filtered = sortSites(sites.filter(site => siteMatches(site, query, category)), sortSelect.value);
-
-            grid.innerHTML = filtered.map(createCard).join("");
-            emptyState.style.display = filtered.length ? "none" : "block";
-            lazyLoadOpenFrames();
-            attachCopyButtons();
-        };
-
-        expandAllBtn.addEventListener("click", () => {
-            const previews = [...document.querySelectorAll("details.preview")];
-            const shouldOpen = previews.some(details => !details.open);
-            previews.forEach(details => details.open = shouldOpen);
-            expandAllBtn.textContent = shouldOpen ? "Collapse All Previews" : "Expand All Previews";
+    const lazyLoadOpenFrames = () => {
+      document.querySelectorAll("details.preview").forEach(details => {
+        details.addEventListener("toggle", () => {
+          if (details.open) {
+            const iframe = details.querySelector("iframe[data-src]");
+            if (iframe && !iframe.src) iframe.src = iframe.dataset.src;
+          }
         });
+      });
+    };
 
-        [searchInput, categoryFilter, sortSelect].forEach(control => {
-            control.addEventListener("input", renderLibrary);
-            control.addEventListener("change", renderLibrary);
+    const attachCopyButtons = () => {
+      document.querySelectorAll(".copy-btn").forEach(button => {
+        button.addEventListener("click", async () => {
+          const originalText = button.textContent;
+          try {
+            await navigator.clipboard.writeText(button.dataset.url);
+            button.textContent = "Copied";
+          } catch (error) {
+            button.textContent = "Copy URL";
+          }
+          window.setTimeout(() => button.textContent = originalText, 1400);
         });
+      });
+    };
 
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
-                    revealObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.12 });
+    const renderLibrary = () => {
+      updateCategoryOptions(sites);
+      renderStats(sites);
 
-        document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
-        renderLibrary();
-    </script>
+      const query = searchInput.value.trim();
+      const category = categoryFilter.value;
+      const filtered = sortSites(sites.filter(site => siteMatches(site, query, category)), sortSelect.value);
+
+      grid.innerHTML = filtered.map(createCard).join("");
+      emptyState.style.display = filtered.length ? "none" : "block";
+      lazyLoadOpenFrames();
+      attachCopyButtons();
+    };
+
+    expandAllBtn.addEventListener("click", () => {
+      const previews = [...document.querySelectorAll("details.preview")];
+      const shouldOpen = previews.some(details => !details.open);
+      previews.forEach(details => details.open = shouldOpen);
+      expandAllBtn.textContent = shouldOpen ? "Collapse All Previews" : "Expand All Previews";
+    });
+
+    [searchInput, categoryFilter, sortSelect].forEach(control => {
+      control.addEventListener("input", renderLibrary);
+      control.addEventListener("change", renderLibrary);
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+    renderLibrary();
+  </script>
 </body>
 
 </html>
