@@ -1337,7 +1337,7 @@
               </div>
             </div>
 
-            <button id="requestButton" class="pay-btn" type="button" disabled>
+            <button id="requestButton" class="pay-btn" type="button">
               Submit booking request
             </button>
 
@@ -1434,10 +1434,15 @@
     };
 
     let selectedRoomId = null;
+
+    // IMPORTANT: booking dates are stored as plain YYYY-MM-DD strings.
+    // This makes cross-month selections completely independent of JS Date
+    // timestamp/timezone behavior.
     let checkIn = null;
     let checkOut = null;
 
     const today = startOfDay(new Date());
+    const todayISO = toISODate(today);
     let calendarCursor = new Date(today.getFullYear(), today.getMonth(), 1);
 
     function startOfDay(date) {
@@ -1451,7 +1456,15 @@
       return `${y}-${m}-${d}`;
     }
 
-    function formatDate(date) {
+    function parseISODate(iso) {
+      if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return null;
+      const [y, m, d] = iso.split("-").map(Number);
+      return new Date(y, m - 1, d);
+    }
+
+    function formatDate(iso) {
+      if (!iso) return "—";
+      const date = parseISODate(iso);
       if (!date) return "—";
       return new Intl.DateTimeFormat("en-MY", {
         day: "numeric",
@@ -1460,18 +1473,20 @@
       }).format(date);
     }
 
-    function diffNights(start, end) {
-      if (!start || !end) return 0;
-      return Math.round((end - start) / 86400000);
+    function diffNights(startISO, endISO) {
+      if (!startISO || !endISO) return 0;
+      const startParts = startISO.split("-").map(Number);
+      const endParts = endISO.split("-").map(Number);
+      const startUTC = Date.UTC(startParts[0], startParts[1] - 1, startParts[2]);
+      const endUTC = Date.UTC(endParts[0], endParts[1] - 1, endParts[2]);
+      return Math.round((endUTC - startUTC) / 86400000);
     }
 
     function isUnavailable(date) {
-      // This page does not claim live availability.
-      // Admin checks other booking channels after the request is submitted.
       return false;
     }
 
-    function hasUnavailableDateBetween(start, end) {
+    function hasUnavailableDateBetween(startISO, endISO) {
       return false;
     }
 
@@ -1500,13 +1515,14 @@
 
       for (let day = 1; day <= lastDay.getDate(); day++) {
         const date = new Date(year, month, day);
+        const iso = toISODate(date);
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "day";
-        btn.dataset.date = toISODate(date);
+        btn.dataset.date = iso;
         btn.innerHTML = `<span>${day}</span>`;
 
-        const past = startOfDay(date) < today;
+        const past = iso < todayISO;
         const blocked = isUnavailable(date);
 
         if (past || blocked) {
@@ -1515,42 +1531,32 @@
           btn.innerHTML += `<small>${blocked ? "Booked" : ""}</small>`;
         }
 
-        if (checkIn && sameDate(date, checkIn)) {
+        if (checkIn === iso || checkOut === iso) {
           btn.classList.add("selected");
         }
 
-        if (checkOut && sameDate(date, checkOut)) {
-          btn.classList.add("selected");
-        }
-
-        if (checkIn && checkOut && date > checkIn && date < checkOut) {
+        if (checkIn && checkOut && iso > checkIn && iso < checkOut) {
           btn.classList.add("in-range");
         }
 
-        btn.addEventListener("click", () => handleDateClick(date));
+        btn.addEventListener("click", () => handleDateClick(iso));
         grid.appendChild(btn);
       }
     }
 
-    function sameDate(a, b) {
-      return a && b && toISODate(a) === toISODate(b);
-    }
-
-    function handleDateClick(date) {
-      if (!checkIn || (checkIn && checkOut)) {
-        checkIn = date;
+    function handleDateClick(clickedISO) {
+      if (!checkIn || checkOut) {
+        checkIn = clickedISO;
+        checkOut = null;
+      } else if (clickedISO <= checkIn) {
+        checkIn = clickedISO;
         checkOut = null;
       } else {
-        if (date <= checkIn) {
-          checkIn = date;
-          checkOut = null;
-        } else {
-          if (hasUnavailableDateBetween(checkIn, date)) {
-            showNotice("Your selected range contains an unavailable date.", "error");
-            return;
-          }
-          checkOut = date;
+        if (hasUnavailableDateBetween(checkIn, clickedISO)) {
+          showNotice("Your selected range contains an unavailable date.", "error");
+          return;
         }
+        checkOut = clickedISO;
       }
 
       renderCalendar();
@@ -1601,8 +1607,8 @@
         emailOK &&
         phone.length >= 6;
 
-      document.getElementById("requestButton").disabled = !valid;
-      return valid;
+      document.getElementById("requestButton").disabled = requestSubmitting;
+      return Boolean(valid);
     }
 
     function selectRoom(roomId) {
@@ -1755,11 +1761,87 @@
       document.head.appendChild(script);
     }
 
-    function submitBookingRequest() {
+    function validateDatesWithBackend(checkInValue, checkOutValue) {
+      return new Promise((resolve, reject) => {
+        const callbackName =
+          "__validateBookingDates_" +
+          Date.now() +
+          "_" +
+          Math.random().toString(36).slice(2, 8);
+
+        const script = document.createElement("script");
+
+        function cleanup() {
+          try {
+            delete window[callbackName];
+          } catch (_) {
+            window[callbackName] = undefined;
+          }
+          script.remove();
+        }
+
+        window[callbackName] = function(data) {
+          cleanup();
+
+          if (data && data.ok) {
+            resolve(data);
+          } else {
+            reject(
+              new Error(
+                (data && data.error) ||
+                "Apps Script rejected the selected dates."
+              )
+            );
+          }
+        };
+
+        script.onerror = function() {
+          cleanup();
+          reject(
+            new Error(
+              "Could not reach Apps Script date validation. " +
+              "Make sure the latest web-app version is deployed."
+            )
+          );
+        };
+
+        const separator =
+          APPS_SCRIPT_BOOKING_URL.includes("?") ? "&" : "?";
+
+        script.src =
+          APPS_SCRIPT_BOOKING_URL +
+          separator +
+          "action=validateDates" +
+          "&checkIn=" + encodeURIComponent(checkInValue) +
+          "&checkOut=" + encodeURIComponent(checkOutValue) +
+          "&callback=" + encodeURIComponent(callbackName) +
+          "&_=" + Date.now();
+
+        document.head.appendChild(script);
+      });
+    }
+
+    async function submitBookingRequest() {
       clearNotice();
 
       if (!validateBooking()) {
-        showNotice("Please complete the room, requested dates, name, email and phone fields.", "error");
+        const missing = [];
+        if (!selectedRoomId) missing.push("room");
+        if (!checkIn) missing.push("check-in date");
+        if (!checkOut) missing.push("check-out date");
+        if (checkIn && checkOut && diffNights(checkIn, checkOut) <= 0) missing.push("valid date range");
+        if (document.getElementById("guestName").value.trim().length < 2) missing.push("name");
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("guestEmail").value.trim())) missing.push("email");
+        if (document.getElementById("guestPhone").value.trim().length < 6) missing.push("phone");
+
+        const dateDebug = checkIn || checkOut
+          ? ` Selected dates: ${checkIn || "—"} → ${checkOut || "—"}.`
+          : "";
+
+        showNotice(
+          `Please complete: ${missing.join(", ") || "booking details"}.${dateDebug}`,
+          "error"
+        );
         return;
       }
 
@@ -1767,6 +1849,26 @@
 
       if (APPS_SCRIPT_BOOKING_URL.includes("PASTE_YOUR")) {
         showNotice("Add your Apps Script Web App URL in APPS_SCRIPT_BOOKING_URL first.", "error");
+        return;
+      }
+
+      try {
+        const dateCheck = await validateDatesWithBackend(checkIn, checkOut);
+
+        if (Number(dateCheck.nights) !== diffNights(checkIn, checkOut)) {
+          showNotice(
+            `Date check mismatch. Browser says ${diffNights(checkIn, checkOut)} nights, ` +
+            `Apps Script says ${dateCheck.nights} nights. ` +
+            `Backend build: ${dateCheck.build || "unknown"}.`,
+            "error"
+          );
+          return;
+        }
+      } catch (dateError) {
+        showNotice(
+          `Date validation failed: ${dateError.message}`,
+          "error"
+        );
         return;
       }
 
@@ -1815,8 +1917,8 @@
         action: "submitBookingRequest",
         requestId: currentRequestId,
         roomId: room.id,
-        checkIn: toISODate(checkIn),
-        checkOut: toISODate(checkOut),
+        checkIn: checkIn,
+        checkOut: checkOut,
         guestName: document.getElementById("guestName").value.trim(),
         guestEmail: document.getElementById("guestEmail").value.trim(),
         guestPhone: document.getElementById("guestPhone").value.trim(),
