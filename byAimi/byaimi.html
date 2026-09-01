@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stay Booking</title>
+  <meta name="description" content="Request a stay at by Aimi Rooms and see the estimated total instantly." />
+
+  <style>
+    :root {
+      --bg: #f7f5f1;
+      --surface: #ffffff;
+      --surface-2: #f0ede7;
+      --text: #1f2421;
+      --muted: #6f746f;
+      --border: #dfddd7;
+      --accent: #1f6f5f;
+      --accent-dark: #155548;
+      --accent-soft: #dceee8;
+      --danger: #b64949;
+      --shadow: 0 16px 40px rgba(31, 36, 33, 0.08);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(247, 245, 241, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(223, 221, 215, 0.8);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      font-size: 1.15rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-cta {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .hero {
+      padding: 72px 0 42px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-size: 0.85rem;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 6vw, 5.2rem);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+      max-width: 760px;
+      margin-bottom: 22px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 650px;
+    }
+
+    .hero-note {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .pill {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      box-shadow: 0 6px 18px rgba(31, 36, 33, 0.04);
+    }
+
+    .hero-photo {
+      min-height: 480px;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(180deg, transparent, rgba(0,0,0,.28)),
+        url("img/house-hero.png") center/cover;
+      position: relative;
+    }
+
+    .hero-badge {
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
+      right: 20px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.9);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .hero-badge strong {
+      display: block;
+    }
+
+    .hero-badge small {
+      color: var(--muted);
+    }
+
+    section {
+      padding: 46px 0;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      letter-spacing: -0.045em;
+      margin-bottom: 8px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      max-width: 650px;
+      margin-bottom: 0;
+    }
+
+    .rooms-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .room-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(31,36,33,.05);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .room-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .room-card.selected {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .room-gallery {
+      position: relative;
+      height: 250px;
+      background: var(--surface-2);
+    }
+
+    .room-gallery img {
+      height: 100%;
+    }
+
+    .gallery-nav {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+      pointer-events: none;
+    }
+
+    .gallery-nav button {
+      pointer-events: auto;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 0;
+      background: rgba(255,255,255,.88);
+      box-shadow: 0 4px 14px rgba(0,0,0,.12);
+      font-size: 1.1rem;
+    }
+
+    .photo-count {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      background: rgba(0,0,0,.62);
+      color: #fff;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: .8rem;
+    }
+
+    .room-body {
+      padding: 20px;
+    }
+
+    .room-title-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .room-title-row h3 {
+      font-size: 1.25rem;
+      margin-bottom: 4px;
+    }
+
+    .room-subtitle {
+      color: var(--muted);
+      font-size: .92rem;
+      margin-bottom: 16px;
+    }
+
+    .price {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .price strong {
+      font-size: 1.45rem;
+    }
+
+    .price span {
+      display: block;
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    .room-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .feature {
+      background: var(--surface-2);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: .82rem;
+    }
+
+    .select-room {
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 14px;
+      font-weight: 800;
+    }
+
+    .select-room:hover {
+      background: var(--accent-dark);
+    }
+
+    .common-carousel {
+      position: relative;
+      padding: 0 54px;
+    }
+
+    .common-carousel-viewport {
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .common-carousel-track {
+      display: flex;
+      gap: 12px;
+      transition: transform .35s ease;
+      will-change: transform;
+    }
+
+    .common-carousel-item {
+      flex: 0 0 calc((100% - 24px) / 3);
+      min-width: 0;
+    }
+
+    .common-carousel-item img {
+      width: 100%;
+      height: 240px;
+      border-radius: 14px;
+      cursor: zoom-in;
+      transition: transform .18s ease;
+    }
+
+    .common-carousel-item img:hover {
+      transform: scale(1.02);
+    }
+
+    .common-carousel-controls {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .common-carousel-controls button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: var(--surface);
+      box-shadow: 0 6px 18px rgba(31,36,33,.08);
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1;
+      pointer-events: auto;
+      z-index: 2;
+    }
+
+    #commonPrev {
+      left: 0;
+    }
+
+    #commonNext {
+      right: 0;
+    }
+
+    .common-carousel-controls button:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+    }
+
+    .booking-layout {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 26px;
+      align-items: start;
+    }
+
+    .calendar-card,
+    .summary-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .calendar-card {
+      padding: 20px;
+    }
+
+    .calendar-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .calendar-top h3 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .calendar-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .calendar-actions button {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 10px;
+      padding: 7px 12px;
+    }
+
+    .calendar-weekdays,
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+
+    .calendar-weekdays {
+      color: var(--muted);
+      font-size: .78rem;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .day {
+      min-height: 62px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      padding: 7px;
+      text-align: left;
+      position: relative;
+      transition: .15s ease;
+    }
+
+    .day:hover:not(.disabled):not(.empty) {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .day.empty {
+      visibility: hidden;
+    }
+
+    .day.disabled {
+      opacity: .35;
+      cursor: not-allowed;
+      background: var(--surface-2);
+    }
+
+    .day.selected {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .day.in-range {
+      background: var(--accent-soft);
+      border-color: transparent;
+    }
+
+    .day.selected.in-range {
+      background: var(--accent);
+    }
+
+    .day small {
+      position: absolute;
+      left: 7px;
+      bottom: 5px;
+      font-size: .68rem;
+      opacity: .68;
+    }
+
+    .selection-note {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .summary-card {
+      padding: 22px;
+      position: sticky;
+      top: 92px;
+    }
+
+    .summary-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .summary-row span:first-child {
+      color: var(--muted);
+    }
+
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      padding: 18px 0;
+    }
+
+    .summary-total strong {
+      font-size: 2rem;
+    }
+
+    .summary-total small {
+      color: var(--muted);
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .field label {
+      display: block;
+      font-weight: 700;
+      font-size: .86rem;
+      margin-bottom: 6px;
+    }
+
+    .field input {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      padding: 12px 13px;
+      outline: none;
+    }
+
+    .field input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    /* Honeypot anti-spam field.
+       Real users never see or interact with this.
+       Simple form-filling bots may detect and fill it. */
+    .hp-field {
+      position: absolute !important;
+      left: -10000px !important;
+      top: auto !important;
+      width: 1px !important;
+      height: 1px !important;
+      overflow: hidden !important;
+      opacity: 0.01 !important;
+      pointer-events: none !important;
+    }
+
+    .pay-btn {
+      width: 100%;
+      margin-top: 14px;
+      border: 0;
+      border-radius: 12px;
+      padding: 14px 16px;
+      background: #111;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .pay-btn:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .secure-note {
+      text-align: center;
+      color: var(--muted);
+      font-size: .78rem;
+      margin: 10px 0 0;
+    }
+
+    .notice {
+      display: none;
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: .88rem;
+    }
+
+    .notice.show {
+      display: block;
+    }
+
+    .notice.error {
+      background: #fae7e7;
+      color: var(--danger);
+    }
+
+    .notice.success {
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+    }
+
+    .footer {
+      padding: 56px 0;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0,0,0,.86);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: min(1100px, 96vw);
+      max-height: 88vh;
+      width: auto;
+      border-radius: 16px;
+    }
+
+    .lightbox button {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 0;
+      background: #fff;
+      font-size: 1.3rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* Keep all 3 room cards side-by-side, like desktop. */
+      .rooms-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .room-gallery {
+        height: 180px;
+      }
+
+      .room-body {
+        padding: 14px;
+      }
+
+      .room-title-row {
+        gap: 8px;
+      }
+
+      .room-title-row h3 {
+        font-size: 1rem;
+      }
+
+      .room-subtitle {
+        font-size: .8rem;
+      }
+
+      .price strong {
+        font-size: 1.05rem;
+      }
+
+      .feature {
+        padding: 5px 7px;
+        font-size: .72rem;
+      }
+
+      .select-room {
+        padding: 10px 8px;
+        font-size: .82rem;
+      }
+
+      /* Keep calendar + summary side-by-side. */
+      .booking-layout {
+        grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
+        gap: 14px;
+      }
+
+      .calendar-card,
+      .summary-card {
+        min-width: 0;
+      }
+
+      .summary-card {
+        position: static;
+      }
+
+      .common-carousel-item img {
+        height: 210px;
+      }
+
+      .hero-photo {
+        min-height: 380px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 14px, 1180px);
+      }
+
+      .nav {
+        min-height: 60px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      section {
+        padding: 30px 0;
+      }
+
+      .section-heading {
+        display: block;
+        margin-bottom: 14px;
+      }
+
+      .section-heading h2 {
+        font-size: 1.55rem;
+        margin-bottom: 6px;
+      }
+
+      .section-heading p {
+        font-size: .82rem;
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      .hero-photo {
+        min-height: 300px;
+      }
+
+      /* ROOMS: still three columns, just compact. */
+      .rooms-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+      }
+
+      .room-card {
+        border-radius: 12px;
+      }
+
+      .room-gallery {
+        height: 105px;
+      }
+
+      .gallery-nav {
+        padding: 0 4px;
+      }
+
+      .gallery-nav button {
+        width: 24px;
+        height: 24px;
+        font-size: .86rem;
+      }
+
+      .photo-count {
+        right: 5px;
+        bottom: 5px;
+        padding: 3px 5px;
+        font-size: .58rem;
+      }
+
+      .room-body {
+        padding: 8px;
+      }
+
+      .room-title-row {
+        display: block;
+      }
+
+      .room-title-row h3 {
+        font-size: .86rem;
+        margin-bottom: 2px;
+      }
+
+      .room-subtitle {
+        min-height: 30px;
+        margin-bottom: 6px;
+        font-size: .62rem;
+        line-height: 1.25;
+      }
+
+      .price {
+        text-align: left;
+        margin-bottom: 6px;
+      }
+
+      .price strong {
+        font-size: .9rem;
+      }
+
+      .price span {
+        display: inline;
+        font-size: .58rem;
+      }
+
+      .room-features {
+        gap: 3px;
+        margin-bottom: 7px;
+      }
+
+      .feature {
+        padding: 3px 5px;
+        font-size: .54rem;
+      }
+
+      .select-room {
+        padding: 7px 4px;
+        border-radius: 8px;
+        font-size: .62rem;
+      }
+
+      /* COMMON AREAS: always 3 images visible. */
+      .common-carousel-track {
+        gap: 6px;
+      }
+
+      .common-carousel-item {
+        flex-basis: calc((100% - 12px) / 3);
+      }
+
+      .common-carousel-item img {
+        height: 115px;
+        border-radius: 9px;
+      }
+
+      .common-carousel {
+        padding: 0 34px;
+      }
+
+      .common-carousel-controls button {
+        width: 28px;
+        height: 28px;
+        font-size: .95rem;
+      }
+
+      /* BOOKING: calendar and summary remain side-by-side. */
+      .booking-layout {
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+        gap: 7px;
+      }
+
+      .calendar-card {
+        padding: 8px;
+        border-radius: 12px;
+      }
+
+      .summary-card {
+        padding: 9px;
+        border-radius: 12px;
+      }
+
+      .calendar-top {
+        margin-bottom: 8px;
+      }
+
+      .calendar-top h3,
+      .summary-card h3 {
+        font-size: .82rem;
+        margin-bottom: 8px;
+      }
+
+      .calendar-actions {
+        gap: 3px;
+      }
+
+      .calendar-actions button {
+        padding: 3px 6px;
+        border-radius: 7px;
+        font-size: .68rem;
+      }
+
+      .calendar-weekdays,
+      .calendar-grid {
+        gap: 2px;
+      }
+
+      .calendar-weekdays {
+        margin-bottom: 4px;
+        font-size: .48rem;
+      }
+
+      .day {
+        min-height: 31px;
+        padding: 3px;
+        border-radius: 6px;
+        font-size: .58rem;
+      }
+
+      .day small {
+        display: none;
+      }
+
+      .selection-note {
+        margin-top: 7px;
+        font-size: .58rem;
+        line-height: 1.3;
+      }
+
+      .summary-row {
+        gap: 5px;
+        padding: 5px 0;
+        font-size: .58rem;
+      }
+
+      .summary-row strong {
+        text-align: right;
+        font-size: .58rem;
+        overflow-wrap: anywhere;
+      }
+
+      .summary-total {
+        padding: 8px 0;
+      }
+
+      .summary-total strong {
+        font-size: 1rem;
+      }
+
+      .summary-total small {
+        font-size: .52rem;
+      }
+
+      .form-grid {
+        gap: 5px;
+      }
+
+      .field label {
+        margin-bottom: 2px;
+        font-size: .55rem;
+      }
+
+      .field input {
+        padding: 6px;
+        border-radius: 7px;
+        font-size: .62rem;
+      }
+
+      .pay-btn {
+        margin-top: 7px;
+        padding: 8px 5px;
+        border-radius: 8px;
+        font-size: .64rem;
+      }
+
+      .secure-note {
+        margin-top: 6px;
+        font-size: .5rem;
+        line-height: 1.3;
+      }
+
+      .notice {
+        margin-top: 6px;
+        padding: 7px;
+        font-size: .55rem;
+      }
+
+      .footer-inner {
+        display: block;
+      }
+    }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 42px;
+      }
+
+      .hero-photo {
+        min-height: 320px;
+      }
+
+      .common-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .common-grid img {
+        height: 130px;
+      }
+
+      .day {
+        min-height: 48px;
+        padding: 5px;
+        font-size: .86rem;
+      }
+
+      .day small {
+        display: none;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .footer-inner {
+        display: block;
+      }
+    
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#top">by Aimi</a>
+      <nav class="nav-links">
+        <a href="#common">House</a>
+        <a href="#rooms">Rooms</a>
+        <a href="#booking">Book</a>
+      </nav>
+      <a class="nav-cta" href="#booking">Book now</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <section id="common">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <h2>House & common areas</h2>
+          </div>
+        </div>
+
+        <div class="common-carousel" id="commonCarousel">
+          <div class="common-carousel-viewport">
+            <div class="common-carousel-track" id="commonCarouselTrack">
+              <div class="common-carousel-item">
+                <img loading="lazy" alt="Living area" src="img/common-living-room.png">
+              </div>
+              <div class="common-carousel-item">
+                <img loading="lazy" alt="Dining area" src="img/common-dining-area.png">
+              </div>
+              <div class="common-carousel-item">
+                <img loading="lazy" alt="Bathroom" src="img/common-bathroom.png">
+              </div>
+              <div class="common-carousel-item">
+                <img loading="lazy" alt="Common sitting area" src="img/common-sitting-area.png">
+              </div>
+              <div class="common-carousel-item">
+                <img loading="lazy" alt="House interior" src="img/common-interior.png">
+              </div>
+              <div class="common-carousel-item">
+                <img loading="lazy" alt="Shared space" src="img/common-shared-space.png">
+              </div>
+              <div class="common-carousel-item">
+                <img loading="lazy" alt="House entrance" src="img/common-entrance.png">
+              </div>
+            </div>
+          </div>
+
+          <div class="common-carousel-controls">
+            <button id="commonPrev" type="button" aria-label="Previous house photos">‹</button>
+            <button id="commonNext" type="button" aria-label="Next house photos">›</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="rooms">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <h2>Choose your room</h2>
+            
+          </div>
+        </div>
+
+        <div class="rooms-grid">
+          <article class="room-card" data-room="room1">
+            <div class="room-gallery" data-images='[
+              "img/room1-queen-1.png",
+              "img/room1-queen-2.png",
+              "img/room1-queen-3.png"
+            ]'>
+              <img alt="Queen bedroom with air conditioning" />
+              <div class="gallery-nav">
+                <button class="prev-photo" type="button" aria-label="Previous photo">‹</button>
+                <button class="next-photo" type="button" aria-label="Next photo">›</button>
+              </div>
+              <span class="photo-count">1 / 3</span>
+            </div>
+            <div class="room-body">
+              <div class="room-title-row">
+                <div>
+                  <h3>Room 1</h3>
+                  <p class="room-subtitle">Queen bedroom with aircond</p>
+                </div>
+                <div class="price">
+                  <strong>RM70</strong>
+                  <span>per night</span>
+                </div>
+              </div>
+              <div class="room-features">
+                <span class="feature">Queen bed</span>
+                <span class="feature">Air conditioning</span>
+              </div>
+              <button class="select-room" type="button" data-room-select="room1">Select Room 1</button>
+            </div>
+          </article>
+
+          <article class="room-card" data-room="room2">
+            <div class="room-gallery" data-images='[
+              "img/room2-single-1.png",
+              "img/room2-single-2.png",
+              "img/room2-single-3.png"
+            ]'>
+              <img alt="Single bedroom without air conditioning" />
+              <div class="gallery-nav">
+                <button class="prev-photo" type="button" aria-label="Previous photo">‹</button>
+                <button class="next-photo" type="button" aria-label="Next photo">›</button>
+              </div>
+              <span class="photo-count">1 / 3</span>
+            </div>
+            <div class="room-body">
+              <div class="room-title-row">
+                <div>
+                  <h3>Room 2</h3>
+                  <p class="room-subtitle">Single bedroom without AC</p>
+                </div>
+                <div class="price">
+                  <strong>RM35</strong>
+                  <span>per night</span>
+                </div>
+              </div>
+              <div class="room-features">
+                <span class="feature">Single bed</span>
+                <span class="feature">No AC</span>
+              </div>
+              <button class="select-room" type="button" data-room-select="room2">Select Room 2</button>
+            </div>
+          </article>
+
+          <article class="room-card" data-room="room3">
+            <div class="room-gallery" data-images='[
+              "img/room3-single-1.png",
+              "img/room3-single-2.png",
+              "img/room3-single-3.png"
+            ]'>
+              <img alt="Second single bedroom without air conditioning" />
+              <div class="gallery-nav">
+                <button class="prev-photo" type="button" aria-label="Previous photo">‹</button>
+                <button class="next-photo" type="button" aria-label="Next photo">›</button>
+              </div>
+              <span class="photo-count">1 / 3</span>
+            </div>
+            <div class="room-body">
+              <div class="room-title-row">
+                <div>
+                  <h3>Room 3</h3>
+                  <p class="room-subtitle">Single bedroom without AC</p>
+                </div>
+                <div class="price">
+                  <strong>RM35</strong>
+                  <span>per night</span>
+                </div>
+              </div>
+              <div class="room-features">
+                <span class="feature">Single bed</span>
+                <span class="feature">No AC</span>
+              </div>
+              <button class="select-room" type="button" data-room-select="room3">Select Room 3</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="booking">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <h2>Select your stay dates</h2>
+          </div>
+        </div>
+
+        <div class="booking-layout">
+          <div class="calendar-card">
+            <div class="calendar-top">
+              <h3 id="calendarTitle">Calendar</h3>
+              <div class="calendar-actions">
+                <button id="prevMonth" type="button">←</button>
+                <button id="nextMonth" type="button">→</button>
+              </div>
+            </div>
+
+            <div class="calendar-weekdays">
+              <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+            </div>
+            <div class="calendar-grid" id="calendarGrid"></div>
+
+            <p class="selection-note" id="selectionNote">
+              Choose your requested check-in date, then your requested check-out date.
+            </p>
+          </div>
+
+          <aside class="summary-card">
+            <h3>Request summary</h3>
+
+            <div class="summary-row">
+              <span>Room</span>
+              <strong id="summaryRoom">Not selected</strong>
+            </div>
+            <div class="summary-row">
+              <span>Check-in</span>
+              <strong id="summaryCheckin">—</strong>
+            </div>
+            <div class="summary-row">
+              <span>Check-out</span>
+              <strong id="summaryCheckout">—</strong>
+            </div>
+            <div class="summary-row">
+              <span>Nights</span>
+              <strong id="summaryNights">0</strong>
+            </div>
+            <div class="summary-row">
+              <span>Nightly rate</span>
+              <strong id="summaryRate">RM0</strong>
+            </div>
+
+            <div class="summary-total">
+              <div>
+                <small>Total</small>
+                <strong id="summaryTotal">RM0</strong>
+              </div>
+              <small>MYR</small>
+            </div>
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="guestName">Guest name</label>
+                <input id="guestName" type="text" autocomplete="name" placeholder="Your full name">
+              </div>
+
+              <div class="field">
+                <label for="guestEmail">Email</label>
+                <input id="guestEmail" type="email" autocomplete="email" placeholder="you@example.com">
+              </div>
+
+              <div class="field">
+                <label for="guestPhone">Phone</label>
+                <input id="guestPhone" type="tel" autocomplete="tel" placeholder="+60...">
+              </div>
+
+              <!-- Honeypot anti-spam field. Do not remove.
+                   Real guests cannot see this field. -->
+              <div class="hp-field" aria-hidden="true">
+                <label for="website">Website</label>
+                <input
+                  id="website"
+                  name="website"
+                  type="text"
+                  tabindex="-1"
+                  autocomplete="off"
+                  inputmode="none"
+                >
+              </div>
+            </div>
+
+            <button id="requestButton" class="pay-btn" type="button" disabled>
+              Submit booking request
+            </button>
+
+            <p class="secure-note">
+              This is a booking request only. Your stay is not confirmed yet.
+              Admin will check availability across other booking platforms and contact you
+              by email or phone with confirmation and payment instructions.
+            </p>
+
+            <div id="bookingNotice" class="notice"></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>by Aimi Rooms</strong><br>
+        <small>Bandar Springhill, Port Dickson.</small>
+      </div>
+      <div>
+        <small>© <span id="year"></span> by Aimi. All rights reserved.</small>
+      </div>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button type="button" id="closeLightbox" aria-label="Close image">×</button>
+    <img id="lightboxImage" alt="Expanded house photo">
+  </div>
+
+  <script>
+    /*
+      IMAGE FILES
+      ------------------------------------------------------------
+      Put all property images inside an "img" folder next to this HTML file.
+
+      Expected structure:
+      /room-booking.html
+      /img/house-hero.png
+      /img/room1-queen-1.png
+      etc.
+    */
+
+    /*
+      ============================================================
+      BOOKING REQUEST BACKEND
+      ============================================================
+
+      Replace APPS_SCRIPT_BOOKING_URL with your deployed Google Apps
+      Script Web App URL.
+
+      Booking flow:
+      1) Guest selects a room and requested dates.
+      2) This page calculates the estimated price.
+      3) Guest submits a BOOKING REQUEST only.
+      4) Apps Script validates the request and recalculates pricing server-side.
+      5) Apps Script stores the request in Google Sheets.
+      6) Apps Script emails the admin.
+      7) Admin checks Airbnb / Booking.com / other booking channels.
+      8) Admin contacts the guest by email or phone to confirm or decline,
+         and provides payment instructions separately.
+
+      IMPORTANT:
+      - The calendar below is a date picker, NOT a live availability calendar.
+      - A submitted request does NOT reserve or confirm the room.
+      - Never trust the displayed total sent by the browser.
+        Apps Script recalculates the official amount.
+    */
+
+    const APPS_SCRIPT_BOOKING_URL = "https://script.google.com/macros/s/AKfycbynO8Knep1WodQ670K1zUrSCc8g8qwvfUTuLrXB6_Z5tAF9PL6Y8hzRT8z87w70vUWq/exec";
+
+    const ROOMS = {
+      room1: {
+        id: "room1",
+        name: "Room 1",
+        description: "Queen bedroom with aircond",
+        nightlyRate: 70
+      },
+      room2: {
+        id: "room2",
+        name: "Room 2",
+        description: "Single bedroom without AC",
+        nightlyRate: 35
+      },
+      room3: {
+        id: "room3",
+        name: "Room 3",
+        description: "Single bedroom without AC",
+        nightlyRate: 35
+      }
+    };
+
+    let selectedRoomId = null;
+    let checkIn = null;
+    let checkOut = null;
+
+    const today = startOfDay(new Date());
+    let calendarCursor = new Date(today.getFullYear(), today.getMonth(), 1);
+
+    function startOfDay(date) {
+      return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    }
+
+    function toISODate(date) {
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, "0");
+      const d = String(date.getDate()).padStart(2, "0");
+      return `${y}-${m}-${d}`;
+    }
+
+    function formatDate(date) {
+      if (!date) return "—";
+      return new Intl.DateTimeFormat("en-MY", {
+        day: "numeric",
+        month: "short",
+        year: "numeric"
+      }).format(date);
+    }
+
+    function diffNights(start, end) {
+      if (!start || !end) return 0;
+      return Math.round((end - start) / 86400000);
+    }
+
+    function isUnavailable(date) {
+      // This page does not claim live availability.
+      // Admin checks other booking channels after the request is submitted.
+      return false;
+    }
+
+    function hasUnavailableDateBetween(start, end) {
+      return false;
+    }
+
+    function renderCalendar() {
+      const grid = document.getElementById("calendarGrid");
+      const title = document.getElementById("calendarTitle");
+
+      grid.innerHTML = "";
+
+      const year = calendarCursor.getFullYear();
+      const month = calendarCursor.getMonth();
+
+      title.textContent = new Intl.DateTimeFormat("en-MY", {
+        month: "long",
+        year: "numeric"
+      }).format(calendarCursor);
+
+      const firstDay = new Date(year, month, 1);
+      const lastDay = new Date(year, month + 1, 0);
+
+      for (let i = 0; i < firstDay.getDay(); i++) {
+        const empty = document.createElement("div");
+        empty.className = "day empty";
+        grid.appendChild(empty);
+      }
+
+      for (let day = 1; day <= lastDay.getDate(); day++) {
+        const date = new Date(year, month, day);
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "day";
+        btn.dataset.date = toISODate(date);
+        btn.innerHTML = `<span>${day}</span>`;
+
+        const past = startOfDay(date) < today;
+        const blocked = isUnavailable(date);
+
+        if (past || blocked) {
+          btn.disabled = true;
+          btn.classList.add("disabled");
+          btn.innerHTML += `<small>${blocked ? "Booked" : ""}</small>`;
+        }
+
+        if (checkIn && sameDate(date, checkIn)) {
+          btn.classList.add("selected");
+        }
+
+        if (checkOut && sameDate(date, checkOut)) {
+          btn.classList.add("selected");
+        }
+
+        if (checkIn && checkOut && date > checkIn && date < checkOut) {
+          btn.classList.add("in-range");
+        }
+
+        btn.addEventListener("click", () => handleDateClick(date));
+        grid.appendChild(btn);
+      }
+    }
+
+    function sameDate(a, b) {
+      return a && b && toISODate(a) === toISODate(b);
+    }
+
+    function handleDateClick(date) {
+      if (!checkIn || (checkIn && checkOut)) {
+        checkIn = date;
+        checkOut = null;
+      } else {
+        if (date <= checkIn) {
+          checkIn = date;
+          checkOut = null;
+        } else {
+          if (hasUnavailableDateBetween(checkIn, date)) {
+            showNotice("Your selected range contains an unavailable date.", "error");
+            return;
+          }
+          checkOut = date;
+        }
+      }
+
+      renderCalendar();
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const room = selectedRoomId ? ROOMS[selectedRoomId] : null;
+      const nights = diffNights(checkIn, checkOut);
+      const total = room && nights > 0 ? room.nightlyRate * nights : 0;
+
+      document.getElementById("summaryRoom").textContent =
+        room ? `${room.name} — ${room.description}` : "Not selected";
+
+      document.getElementById("summaryCheckin").textContent = formatDate(checkIn);
+      document.getElementById("summaryCheckout").textContent = formatDate(checkOut);
+      document.getElementById("summaryNights").textContent = nights > 0 ? nights : "0";
+      document.getElementById("summaryRate").textContent = room ? `RM${room.nightlyRate}` : "RM0";
+      document.getElementById("summaryTotal").textContent = `RM${total}`;
+
+      const note = document.getElementById("selectionNote");
+
+      if (!checkIn) {
+        note.textContent = "Choose your requested check-in date, then your requested check-out date.";
+      } else if (!checkOut) {
+        note.textContent = `Requested check-in: ${formatDate(checkIn)}. Now choose your requested check-out date.`;
+      } else {
+        note.textContent = `${nights} night${nights === 1 ? "" : "s"} requested. Admin will confirm availability after submission.`;
+      }
+
+      validateBooking();
+    }
+
+    function validateBooking() {
+      const name = document.getElementById("guestName").value.trim();
+      const email = document.getElementById("guestEmail").value.trim();
+      const phone = document.getElementById("guestPhone").value.trim();
+
+      const emailOK = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      const nights = diffNights(checkIn, checkOut);
+
+      const valid =
+        selectedRoomId &&
+        checkIn &&
+        checkOut &&
+        nights > 0 &&
+        name.length >= 2 &&
+        emailOK &&
+        phone.length >= 6;
+
+      document.getElementById("requestButton").disabled = !valid;
+      return valid;
+    }
+
+    function selectRoom(roomId) {
+      selectedRoomId = roomId;
+
+      document.querySelectorAll(".room-card").forEach(card => {
+        card.classList.toggle("selected", card.dataset.room === roomId);
+      });
+
+      updateSummary();
+      document.getElementById("booking").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function showNotice(message, type = "error") {
+      const notice = document.getElementById("bookingNotice");
+      notice.className = `notice show ${type}`;
+      notice.textContent = message;
+    }
+
+    function clearNotice() {
+      const notice = document.getElementById("bookingNotice");
+      notice.className = "notice";
+      notice.textContent = "";
+    }
+
+    function createRequestId() {
+      if (window.crypto && crypto.randomUUID) {
+        return crypto.randomUUID();
+      }
+
+      return `req-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+    }
+
+    let currentRequestId = createRequestId();
+    let requestSubmitting = false;
+    let activeRequestId = null;
+    let requestPollTimer = null;
+    let requestTimeoutTimer = null;
+
+    function stopRequestWatchers() {
+      if (requestPollTimer) {
+        clearTimeout(requestPollTimer);
+        requestPollTimer = null;
+      }
+
+      if (requestTimeoutTimer) {
+        clearTimeout(requestTimeoutTimer);
+        requestTimeoutTimer = null;
+      }
+    }
+
+    function finishRequestSuccess(data = {}) {
+      if (!requestSubmitting) return;
+
+      stopRequestWatchers();
+      requestSubmitting = false;
+
+      const button = document.getElementById("requestButton");
+      const requestId = data.requestId || activeRequestId || currentRequestId;
+      const reference = requestId ? ` Reference: ${requestId}.` : "";
+
+      showNotice(
+        `Booking request received.${reference} This is not a confirmed booking. ` +
+        `Admin will check availability and contact you by email or phone for confirmation and payment instructions.`,
+        "success"
+      );
+
+      button.textContent = "Request submitted";
+      button.disabled = true;
+
+      activeRequestId = null;
+      currentRequestId = createRequestId();
+    }
+
+    function finishRequestError(message) {
+      if (!requestSubmitting) return;
+
+      stopRequestWatchers();
+      requestSubmitting = false;
+      activeRequestId = null;
+
+      showNotice(
+        message || "We could not confirm that your booking request was received. Please try again.",
+        "error"
+      );
+
+      const button = document.getElementById("requestButton");
+      button.textContent = "Submit booking request";
+      validateBooking();
+    }
+
+    function checkRequestStatus(requestId) {
+      if (!requestSubmitting || activeRequestId !== requestId) return;
+
+      const callbackName =
+        "__bookingStatus_" +
+        Date.now() +
+        "_" +
+        Math.random().toString(36).slice(2, 8);
+
+      const script = document.createElement("script");
+
+      function cleanup() {
+        try {
+          delete window[callbackName];
+        } catch (_) {
+          window[callbackName] = undefined;
+        }
+
+        script.remove();
+      }
+
+      window[callbackName] = function(data) {
+        cleanup();
+
+        if (!requestSubmitting || activeRequestId !== requestId) return;
+
+        if (data && data.ok && data.found) {
+          finishRequestSuccess({ requestId });
+          return;
+        }
+
+        requestPollTimer = setTimeout(
+          () => checkRequestStatus(requestId),
+          1500
+        );
+      };
+
+      script.onerror = function() {
+        cleanup();
+
+        if (!requestSubmitting || activeRequestId !== requestId) return;
+
+        requestPollTimer = setTimeout(
+          () => checkRequestStatus(requestId),
+          2000
+        );
+      };
+
+      const separator = APPS_SCRIPT_BOOKING_URL.includes("?") ? "&" : "?";
+
+      script.src =
+        APPS_SCRIPT_BOOKING_URL +
+        separator +
+        "action=getRequestStatus" +
+        "&requestId=" + encodeURIComponent(requestId) +
+        "&callback=" + encodeURIComponent(callbackName) +
+        "&_=" + Date.now();
+
+      document.head.appendChild(script);
+    }
+
+    function submitBookingRequest() {
+      clearNotice();
+
+      if (!validateBooking()) {
+        showNotice("Please complete the room, requested dates, name, email and phone fields.", "error");
+        return;
+      }
+
+      if (requestSubmitting) return;
+
+      if (APPS_SCRIPT_BOOKING_URL.includes("PASTE_YOUR")) {
+        showNotice("Add your Apps Script Web App URL in APPS_SCRIPT_BOOKING_URL first.", "error");
+        return;
+      }
+
+      const room = ROOMS[selectedRoomId];
+      const nights = diffNights(checkIn, checkOut);
+      const button = document.getElementById("requestButton");
+
+      requestSubmitting = true;
+      activeRequestId = currentRequestId;
+      button.disabled = true;
+      button.textContent = "Sending request...";
+
+      // Fallback status check: if the iframe callback is blocked by the host
+      // or browser, poll a public-safe Apps Script endpoint using JSONP.
+      requestTimeoutTimer = setTimeout(() => {
+        finishRequestError(
+          "We could not confirm the submission. Please check your internet connection and try again. " +
+          "If this keeps happening, verify that the Apps Script /exec URL opens without requiring Google sign-in."
+        );
+      }, 25000);
+
+      /*
+        A normal HTML form is submitted to a hidden iframe instead of using
+        cross-origin fetch. This works reliably with an Apps Script Web App.
+
+        The Apps Script response sends a window.postMessage() back to this page.
+      */
+      const iframeName = "bookingRequestReceiver";
+      let iframe = document.getElementById(iframeName);
+
+      if (!iframe) {
+        iframe = document.createElement("iframe");
+        iframe.id = iframeName;
+        iframe.name = iframeName;
+        iframe.style.display = "none";
+        document.body.appendChild(iframe);
+      }
+
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = APPS_SCRIPT_BOOKING_URL;
+      form.target = iframeName;
+      form.style.display = "none";
+
+      const fields = {
+        action: "submitBookingRequest",
+        requestId: currentRequestId,
+        roomId: room.id,
+        checkIn: toISODate(checkIn),
+        checkOut: toISODate(checkOut),
+        guestName: document.getElementById("guestName").value.trim(),
+        guestEmail: document.getElementById("guestEmail").value.trim(),
+        guestPhone: document.getElementById("guestPhone").value.trim(),
+
+        // Display-only values. Apps Script ignores these for official pricing
+        // and recalculates the total from roomId + dates.
+        displayedNightlyRate: room.nightlyRate,
+        displayedTotal: room.nightlyRate * nights,
+
+        // Honeypot field for simple bot filtering.
+        website: document.getElementById("website").value.trim()
+      };
+
+      Object.entries(fields).forEach(([name, value]) => {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = name;
+        input.value = String(value);
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      form.submit();
+      form.remove();
+
+      checkRequestStatus(activeRequestId);
+    }
+
+    window.addEventListener("message", event => {
+      const data = event.data;
+
+      if (!data || data.type !== "room-booking-response") return;
+
+      if (data.ok) {
+        finishRequestSuccess(data);
+      } else {
+        finishRequestError(
+          data.error || "We could not submit your booking request. Please try again."
+        );
+      }
+    });
+
+    // Room galleries
+    document.querySelectorAll(".room-gallery").forEach(gallery => {
+      const images = JSON.parse(gallery.dataset.images);
+      const img = gallery.querySelector("img");
+      const count = gallery.querySelector(".photo-count");
+      let index = 0;
+
+      function refresh() {
+        img.src = images[index];
+        count.textContent = `${index + 1} / ${images.length}`;
+      }
+
+      gallery.querySelector(".prev-photo").addEventListener("click", () => {
+        index = (index - 1 + images.length) % images.length;
+        refresh();
+      });
+
+      gallery.querySelector(".next-photo").addEventListener("click", () => {
+        index = (index + 1) % images.length;
+        refresh();
+      });
+
+      refresh();
+    });
+
+    // Room selection
+    document.querySelectorAll("[data-room-select]").forEach(button => {
+      button.addEventListener("click", () => selectRoom(button.dataset.roomSelect));
+    });
+
+    // Calendar navigation
+    document.getElementById("prevMonth").addEventListener("click", () => {
+      const previous = new Date(calendarCursor.getFullYear(), calendarCursor.getMonth() - 1, 1);
+      const earliest = new Date(today.getFullYear(), today.getMonth(), 1);
+
+      if (previous >= earliest) {
+        calendarCursor = previous;
+        renderCalendar();
+      }
+    });
+
+    document.getElementById("nextMonth").addEventListener("click", () => {
+      calendarCursor = new Date(calendarCursor.getFullYear(), calendarCursor.getMonth() + 1, 1);
+      renderCalendar();
+    });
+
+    // Form validation
+    ["guestName", "guestEmail", "guestPhone"].forEach(id => {
+      document.getElementById(id).addEventListener("input", validateBooking);
+    });
+
+    document.getElementById("requestButton").addEventListener("click", submitBookingRequest);
+
+    // Common-area carousel: always shows 3 images at once.
+    const commonTrack = document.getElementById("commonCarouselTrack");
+    const commonItems = Array.from(document.querySelectorAll(".common-carousel-item"));
+    const commonPrev = document.getElementById("commonPrev");
+    const commonNext = document.getElementById("commonNext");
+    let commonIndex = 0;
+
+    function getCommonMaxIndex() {
+      return Math.max(0, commonItems.length - 3);
+    }
+
+    function updateCommonCarousel() {
+      if (!commonTrack || !commonItems.length) return;
+
+      const firstItem = commonItems[0];
+      const trackStyles = getComputedStyle(commonTrack);
+      const gap = parseFloat(trackStyles.gap) || 0;
+      const step = firstItem.getBoundingClientRect().width + gap;
+
+      commonTrack.style.transform = `translateX(-${commonIndex * step}px)`;
+
+      commonPrev.disabled = commonIndex <= 0;
+      commonNext.disabled = commonIndex >= getCommonMaxIndex();
+    }
+
+    commonPrev.addEventListener("click", () => {
+      commonIndex = Math.max(0, commonIndex - 1);
+      updateCommonCarousel();
+    });
+
+    commonNext.addEventListener("click", () => {
+      commonIndex = Math.min(getCommonMaxIndex(), commonIndex + 1);
+      updateCommonCarousel();
+    });
+
+    window.addEventListener("resize", updateCommonCarousel);
+
+    // Common-area lightbox
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+
+    document.querySelectorAll(".common-carousel-item img").forEach(img => {
+      img.addEventListener("click", () => {
+        lightboxImage.src = img.src;
+        lightbox.classList.add("open");
+        lightbox.setAttribute("aria-hidden", "false");
+      });
+    });
+
+    document.getElementById("closeLightbox").addEventListener("click", () => {
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden", "true");
+    });
+
+    lightbox.addEventListener("click", event => {
+      if (event.target === lightbox) {
+        lightbox.classList.remove("open");
+        lightbox.setAttribute("aria-hidden", "true");
+      }
+    });
+
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    renderCalendar();
+    updateSummary();
+    updateCommonCarousel();
+  </script>
+</body>
+</html>
